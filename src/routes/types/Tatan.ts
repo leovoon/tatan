@@ -9,6 +9,7 @@ export interface Tatan {
 	context: Context;
 	searchInformation: SearchInformation;
 	items: Item[];
+	error?: ErrorResponseBody;
 }
 
 export interface Url {
@@ -83,4 +84,40 @@ export interface Image {
 	thumbnailLink: string;
 	thumbnailHeight: number;
 	thumbnailWidth: number;
+}
+
+export interface ErrorResponseBody {
+	code: number;
+	message: string;
+	errors: Error[];
+	status: string;
+	details: Detail[];
+}
+
+export interface Error {
+	message: string;
+	domain: string;
+	reason: string;
+}
+
+export interface Detail {
+	'@type': string;
+	reason?: string;
+	domain?: string;
+	metadata?: Metadata;
+	links?: Link[];
+}
+
+export interface Metadata {
+	service: string;
+	quota_limit: string;
+	quota_location: string;
+	consumer: string;
+	quota_limit_value: string;
+	quota_metric: string;
+}
+
+export interface Link {
+	description: string;
+	url: string;
 }

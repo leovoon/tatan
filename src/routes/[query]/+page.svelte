@@ -7,12 +7,16 @@
 
 <h1>🔍 搜寻结果</h1>
 
-{#if data.tatan.items}
-	<div class="container">
-		{#each data.tatan.items as item}
-			<Gif gifItem={item} />
-		{/each}
-	</div>
+{#if data.tatan.error}
+	<Info>{data.tatan.error.status === 'RESOURCE_EXHAUSTED' ? '明天再来吧。' : '出错了'}</Info>
+
+	{#if data.tatan.items}
+		<div class="container">
+			{#each data.tatan.items as item}
+				<Gif gifItem={item} />
+			{/each}
+		</div>
+	{/if}
 {:else}
 	<Info>没有找到，你可能试下中文 😶‍🌫️</Info>
 {/if}

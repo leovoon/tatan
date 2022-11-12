@@ -12,32 +12,38 @@
 	};
 </script>
 
-<nav>
-	<a class="saved" href="/saved">⭐️</a>
+<div class="container">
+	<nav>
+		<a class="saved" href="/saved">⭐️</a>
 
-	<div class="inputWrapper">
-		<input
-			type="text"
-			on:change={() => handleQuery()}
-			placeholder="Search tatan.."
-			bind:value={search}
-		/>
-	</div>
-</nav>
+		<div class="inputWrapper">
+			<input
+				type="text"
+				on:change={() => handleQuery()}
+				placeholder="Search tatan.."
+				bind:value={search}
+			/>
+		</div>
+	</nav>
 
-<main>
-	<slot />
-</main>
+	<main>
+		<slot />
+	</main>
 
-<footer>
-	<small>tatan world v0.0.1</small>
-	<a href="https://github.com/leovoon/tatan">
-		<img width={15} height={15} src={githubIcon} alt="source" />
-	</a>
-	<small>leovoon</small>
-</footer>
+	<footer>
+		<small>tatan world v0.0.1</small>
+		<a href="https://github.com/leovoon/tatan">
+			<img width={15} height={15} src={githubIcon} alt="source" />
+		</a>
+		<small>leovoon</small>
+	</footer>
+</div>
 
 <style>
+	.container {
+		width: inherit;
+		max-width: inherit;
+	}
 	main {
 		padding: 4em;
 	}

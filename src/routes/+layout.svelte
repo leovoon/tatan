@@ -1,5 +1,4 @@
 <script lang="ts">
-	let search: '';
 	import { goto } from '$app/navigation';
 	import githubIcon from '$lib/assets/github.svg';
 	import { page } from '$app/stores';
@@ -30,6 +29,7 @@
 				bind:value={search}
 			/>
 		</div>
+		<button on:click={() => handleQuery()}>🔍</button>
 	</nav>
 
 	<main>
@@ -47,11 +47,11 @@
 
 <style>
 	.container {
-		width: inherit;
-		max-width: inherit;
+		width: 600px;
+		max-width: 65ch;
 	}
 	main {
-		padding: 4em;
+		padding: 2em;
 	}
 	nav {
 		width: 100%;
@@ -78,7 +78,6 @@
 		display: flex;
 		align-items: center;
 		flex: 1;
-		padding-inline-end: 2rem;
 	}
 
 	input {
@@ -99,6 +98,23 @@
 		appearance: none;
 	}
 
+	button {
+		background: linear-gradient(90deg, #00ff91 0%, #3ad58d 100%);
+		border-color: #00ff91;
+		font-size: x-large;
+		border-radius: 0.375rem;
+		width: 50px;
+		height: 45px;
+		margin-inline: 1rem;
+		cursor: pointer;
+	}
+
+	button:active,
+	button:hover {
+		border: #3ad58d;
+		background: #20d9a8;
+	}
+
 	footer {
 		display: flex;
 		justify-content: center;
@@ -110,6 +126,10 @@
 	}
 
 	@media (max-width: 640px) {
+		.container {
+			width: 100%;
+			max-width: 100vw;
+		}
 		main {
 			padding: 1em;
 		}

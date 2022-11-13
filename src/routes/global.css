@@ -4,11 +4,6 @@ body {
     padding: 0;
     display: grid;
     place-items: center;
-    min-width: 65ch;
+    width: 100%;
 }
 
-@media (max-width: 600px) {
-    body {
-        min-width: 0;
-    }
-}

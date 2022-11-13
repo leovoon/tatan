@@ -1,5 +1,17 @@
 
 
+## [0.2.0](https://github.com/leovoon/tatan/compare/0.1.0...0.2.0) (2022-11-13)
+
+
+### Features
+
+* Add error handling and cut API down to size ([5238837](https://github.com/leovoon/tatan/commit/523883709eb77fe2b050ffe1fbd253ba95febc2a))
+
+
+### Styles
+
+* Add button and minor style fixes ([3b5e400](https://github.com/leovoon/tatan/commit/3b5e400895c8b03a02a4c646797c2c114f4a3b17))
+
 ## 0.1.0 (2022-11-12)
 
 

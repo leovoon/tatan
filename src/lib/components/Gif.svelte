@@ -1,39 +1,38 @@
 <script lang="ts">
-	import type { Item } from '../../routes/types/Tatan';
-	import loadingImagePath from '$lib/assets/loading.webp';
-	export let gifItem: Item;
+	export let gifImg: string;
+	import { page } from '$app/stores';
 
-	$: ({ link, title, fileFormat } = gifItem);
-	const getFileFromUrl = async (url: string, defaultType = fileFormat) => {
+	$: query = $page.params.query;
+
+	const getFileFromUrl = async (url: string, defaultFileFormat = 'image/gif') => {
 		const response = await fetch(url, { mode: 'cors' });
 		const data = await response.blob();
 
 		return new File([data], url, {
-			type: response.headers.get('content-type') || defaultType
+			type: response.headers.get('content-type') || defaultFileFormat
 		});
 	};
 
 	const handleClick = async () => {
-		const file = await getFileFromUrl(link);
+		const file = await getFileFromUrl(gifImg);
 		const shareData = {
 			files: [file],
-			title,
-			text: title
+			title: '',
+			text: ''
 		};
-
-		if (!navigator.canShare(shareData)) throw new Error('Your browser does not support.');
-
-		navigator.share(shareData);
+		try {
+			if (!navigator.canShare(shareData)) throw new Error('Your browser does not support.');
+			navigator.share(shareData);
+		} catch (error) {
+			alert(
+				'You probably share from an unsecured context. It is not supported. Contact the developer for more information. @leovoon'
+			);
+		}
 	};
 </script>
 
 <div class="gif" on:click={handleClick} on:keydown={handleClick}>
-	<img
-		src={gifItem.link || loadingImagePath}
-		alt={gifItem.title}
-		loading="lazy"
-		referrerpolicy="no-referrer"
-	/>
+	<img src={gifImg} alt={query} loading="lazy" referrerpolicy="no-referrer" />
 </div>
 
 <style>
@@ -52,5 +51,6 @@
 		height: 100%;
 		border-radius: 10px;
 		object-fit: cover;
+		background-image: url('$lib/assets/loading.webp');
 	}
 </style>

@@ -5,7 +5,13 @@
 	import { page } from '$app/stores';
 	import './global.css';
 
+	let search: '';
+
 	const handleQuery = () => {
+		if (!search) {
+			alert('人生不留空白哦 ❤️ ');
+			return;
+		}
 		if (search === $page.params.query) return;
 
 		goto(`/${search}`, { replaceState: true });

@@ -5,14 +5,15 @@
 	export let data: PageData;
 </script>
 
-<h1>🔍 搜寻结果</h1>
-
 {#if data.tatan.error}
 	<Info>{data.tatan.error.status === 'RESOURCE_EXHAUSTED' ? '明天再来吧。' : '出错了'}</Info>
 {:else if data.tatan.items}
 	<div class="container">
-		{#each data.tatan.items as item}
-			<Gif gifItem={item} />
+		{#each data.tatan.items as { link }}
+			{@const isHTTPS = link.startsWith('https://')}
+			{#if isHTTPS}
+				<Gif gifImg={link} />
+			{/if}
 		{/each}
 	</div>
 {:else}
@@ -20,9 +21,6 @@
 {/if}
 
 <style>
-	h1 {
-		font-size: large;
-	}
 	.container {
 		display: grid;
 		gap: 10px;

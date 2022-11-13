@@ -3,6 +3,7 @@
 	import githubIcon from '$lib/assets/github.svg';
 	import { page } from '$app/stores';
 	import './global.css';
+	import { version } from '../../package.json';
 
 	let search: '';
 
@@ -37,7 +38,7 @@
 	</main>
 
 	<footer>
-		<small>tatan world v0.0.1</small>
+		<small>tatan world v{version}</small>
 		<a href="https://github.com/leovoon/tatan">
 			<img width={15} height={15} src={githubIcon} alt="source" />
 		</a>

@@ -40,6 +40,7 @@
 		},
 		"github": {
 			"release": true,
+			"releaseName": "v${version}",
 			"host": "github.com",
 			"web": true
 		},

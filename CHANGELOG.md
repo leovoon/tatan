@@ -1,5 +1,14 @@
 
 
+### [0.2.1](https://github.com/leovoon/tatan/compare/0.2.0...0.2.1) (2022-11-14)
+
+
+### Bug Fixes
+
+* Fix package version ([089890a](https://github.com/leovoon/tatan/commit/089890a0f3526a97212f7eb53e03f1e0aa172dce))
+* remove previous package version import ([83a6900](https://github.com/leovoon/tatan/commit/83a69004ae47b8f1a0bd273170453a99bf7ecf2d))
+* Update version number in footer ([6d8181c](https://github.com/leovoon/tatan/commit/6d8181ca4b96c94a96873ae13b53ffb04115f75c))
+
 ## [0.2.0](https://github.com/leovoon/tatan/compare/0.1.0...0.2.0) (2022-11-13)
 
 

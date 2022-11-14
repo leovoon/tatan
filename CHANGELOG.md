@@ -1,5 +1,12 @@
 
 
+### [0.2.3](https://github.com/leovoon/tatan/compare/0.2.2...0.2.3) (2022-11-14)
+
+
+### Bug Fixes
+
+* Show error image when image failed to load ([40001c4](https://github.com/leovoon/tatan/commit/40001c435c912078c58eb952a2cadd399aaad20e))
+
 ### [0.2.2](https://github.com/leovoon/tatan/compare/0.2.1...0.2.2) (2022-11-14)
 
 

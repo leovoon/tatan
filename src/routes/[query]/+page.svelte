@@ -10,10 +10,7 @@
 {:else if data.tatan.items}
 	<div class="container">
 		{#each data.tatan.items as { link }}
-			{@const isHTTPS = link.startsWith('https://')}
-			{#if isHTTPS}
-				<Gif gifImg={link} />
-			{/if}
+			<Gif gifImg={link} />
 		{/each}
 	</div>
 {:else}

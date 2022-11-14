@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let gifImg: string;
 	import { page } from '$app/stores';
-
+	import imageFailedSVG from '$lib/assets/image-failed.svg';
 	$: query = $page.params.query;
 
 	const getFileFromUrl = async (url: string, defaultFileFormat = 'image/gif') => {
@@ -29,10 +29,22 @@
 			);
 		}
 	};
+
+	const handleImageLoadFailed = (e: Event) => {
+		const target = e.target as HTMLImageElement;
+		target.src = imageFailedSVG;
+		target.onerror = null;
+	};
 </script>
 
 <div class="gif" on:click={handleClick} on:keydown={handleClick}>
-	<img src={gifImg} alt={query} loading="lazy" referrerpolicy="no-referrer" />
+	<img
+		src={gifImg}
+		on:error={handleImageLoadFailed}
+		alt={query}
+		loading="lazy"
+		referrerpolicy="no-referrer"
+	/>
 </div>
 
 <style>
@@ -51,6 +63,9 @@
 		height: 100%;
 		border-radius: 10px;
 		object-fit: cover;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
 		background-image: url('$lib/assets/loading.webp');
 	}
 </style>

@@ -1,5 +1,12 @@
 
 
+### [0.2.2](https://github.com/leovoon/tatan/compare/0.2.1...0.2.2) (2022-11-14)
+
+
+### Bug Fixes
+
+* Revert exclude unsecure src, add handling for error image ([cbcce43](https://github.com/leovoon/tatan/commit/cbcce43ce07d028a97a093844c5f1ccfd6639572))
+
 ### [0.2.1](https://github.com/leovoon/tatan/compare/0.2.0...0.2.1) (2022-11-14)
 
 

@@ -2,10 +2,12 @@
 	import { goto } from '$app/navigation';
 	import githubIcon from '$lib/assets/github.svg';
 	import { page } from '$app/stores';
+	import {PUBLIC_PACKAGE_VERSION} from '$env/static/public'
 	import './global.css';
-	import { version } from '../../package.json';
+	import type { LayoutServerData } from './$types';
 
 	let search: '';
+	export let data: LayoutServerData;
 
 	const handleQuery = () => {
 		if (!search) {
@@ -38,7 +40,7 @@
 	</main>
 
 	<footer>
-		<small>tatan world v{version}</small>
+		<small>tatan world v{data.npm_package_version}</small>
 		<a href="https://github.com/leovoon/tatan">
 			<img width={15} height={15} src={githubIcon} alt="source" />
 		</a>

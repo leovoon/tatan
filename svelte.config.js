@@ -7,6 +7,12 @@ const config = {
 	// for more information about preprocessors
 	preprocess: preprocess(),
 
+	vitePlugin: {
+		experimental: {
+			useVitePreprocess: true
+		}
+	},
+
 	kit: {
 		adapter: adapter()
 	}

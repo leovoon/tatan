@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let gifImg: string;
 	import { page } from '$app/stores';
-	import imageFailedSVG from '$lib/assets/image-failed.svg';
+	import imageFailedSVG from '$lib/assets/imageFailed.svg';
 	$: query = $page.params.query;
 
 	const getFileFromUrl = async (url: string, defaultFileFormat = 'image/gif') => {

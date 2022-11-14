@@ -2,7 +2,6 @@
 	import { goto } from '$app/navigation';
 	import githubIcon from '$lib/assets/github.svg';
 	import { page } from '$app/stores';
-	import {PUBLIC_PACKAGE_VERSION} from '$env/static/public'
 	import './global.css';
 	import type { LayoutServerData } from './$types';
 

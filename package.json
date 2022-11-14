@@ -40,9 +40,8 @@
 		},
 		"github": {
 			"release": true,
-			"releaseName": "v${version}",
-			"host": "github.com",
-			"web": true
+			"releaseName": "Release v${version}",
+			"host": "github.com"
 		},
 		"npm": {
 			"publish": false

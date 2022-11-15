@@ -35,9 +35,8 @@
 </script>
 
 <div class="buttonGroup">
-	<button disabled={!showPrevious} on:click={handlePrevious}>
-		<span style:display={isNavigating ? 'block' : 'none'}> 加载中... </span>
-		<span style:display={isNavigating ? 'none' : 'block'}>上一页</span>
+	<button disabled={!showPrevious || isNavigating} on:click={handlePrevious}>
+		<span>上一页</span>
 	</button>
 	<button disabled={!showNext || isNavigating} on:click={handleNext}>
 		<span style:display={isNavigating ? 'block' : 'none'}> 加载中... </span>

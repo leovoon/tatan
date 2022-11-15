@@ -123,7 +123,7 @@
 		justify-content: center;
 		align-items: center;
 		padding: 1rem;
-		margin-bottom: 40px;
+		margin-bottom: 120px;
 		column-gap: 1rem;
 		color: slategrey;
 	}

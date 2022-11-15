@@ -2,7 +2,10 @@
 	import type { PageData } from './$types';
 	import Gif from '$lib/components/Gif.svelte';
 	import Info from '$lib/components/Info.svelte';
+	import Pagination from '$lib/components/Pagination.svelte';
 	export let data: PageData;
+
+	$: totalResults = +data.tatan.queries.request[0].totalResults;
 </script>
 
 {#if data.tatan.error}
@@ -13,6 +16,7 @@
 			<Gif gifImg={link} />
 		{/each}
 	</div>
+	<Pagination {totalResults} />
 {:else}
 	<Info>没有找到，你可能试下中文 😶‍🌫️</Info>
 {/if}
@@ -23,7 +27,6 @@
 		gap: 10px;
 		grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
 		grid-template-rows: masonry;
-		margin-bottom: 80px;
 	}
 
 	@media (min-width: 500px) {

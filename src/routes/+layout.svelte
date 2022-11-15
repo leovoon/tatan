@@ -65,6 +65,7 @@
 		justify-content: space-between;
 		align-items: center;
 		background-color: aliceblue;
+		z-index: 99;
 	}
 
 	.saved {

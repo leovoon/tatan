@@ -1,5 +1,23 @@
 
 
+## [0.3.0](https://github.com/leovoon/tatan/compare/0.2.3...0.3.0) (2022-11-15)
+
+
+### Features
+
+* Added pagination ([0c7ae45](https://github.com/leovoon/tatan/commit/0c7ae4511ee64549a2eb38bc9c3547de116391c4))
+
+
+### Bug Fixes
+
+* use Vite assets handling for url() in CSS ([3784c09](https://github.com/leovoon/tatan/commit/3784c09db7f9c94e6ca130300271e2453c655965))
+
+
+### Styles
+
+* Fix footer ([321ce3b](https://github.com/leovoon/tatan/commit/321ce3be39799d4e2fd30dde4af739e9faed0bbf))
+* Fix navbar on top ([18f0527](https://github.com/leovoon/tatan/commit/18f0527cdccbf79b0429c0ddab83fb7b337eb0bb))
+
 ### [0.2.3](https://github.com/leovoon/tatan/compare/0.2.2...0.2.3) (2022-11-14)
 
 

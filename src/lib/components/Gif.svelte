@@ -20,12 +20,8 @@
 			title: '',
 			text: ''
 		};
-		try {
-			if (!navigator.canShare(shareData)) throw new Error('Your browser does not support.');
-			await navigator.share(shareData);
-		} catch (error) {
-			alert('Please open in a secured browser.');
-		}
+		if (!navigator.canShare(shareData)) alert('Your browser does not support.');
+		await navigator.share(shareData);
 	};
 
 	const handleImageLoadFailed = (e: Event) => {

@@ -1,5 +1,17 @@
 
 
+### [0.3.1](https://github.com/leovoon/tatan/compare/0.3.0...0.3.1) (2022-11-18)
+
+
+### Bug Fixes
+
+* Pagination button disabled ([2350e29](https://github.com/leovoon/tatan/commit/2350e29fd985fc7a2233d6f188bbe0db5b1d5b1c))
+
+
+### Styles
+
+* Add loading skeleton and minor style update ([a9a0d5b](https://github.com/leovoon/tatan/commit/a9a0d5b206d656695f503c585e2b4cec3ce788f4))
+
 ## [0.3.0](https://github.com/leovoon/tatan/compare/0.2.3...0.3.0) (2022-11-15)
 
 

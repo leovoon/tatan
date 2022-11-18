@@ -3,18 +3,28 @@
 	import Gif from '$lib/components/Gif.svelte';
 	import Info from '$lib/components/Info.svelte';
 	import Pagination from '$lib/components/Pagination.svelte';
+	import GifSkeleton from '$lib/components/GifSkeleton.svelte';
+	import { navigating } from '$app/stores';
 	export let data: PageData;
 
 	$: totalResults = +data.tatan.queries.request[0].totalResults;
+
+	$: isNavigating = $navigating !== null;
 </script>
 
 {#if data.tatan.error}
 	<Info>{data.tatan.error.status === 'RESOURCE_EXHAUSTED' ? '明天再来吧。' : '出错了'}</Info>
 {:else if data.tatan.items}
 	<div class="container">
-		{#each data.tatan.items as { link }}
-			<Gif gifImg={link} />
-		{/each}
+		{#if isNavigating}
+			{#each Array(10) as _, i}
+				<GifSkeleton />
+			{/each}
+		{:else}
+			{#each data.tatan.items as { link }}
+				<Gif gifImg={link} />
+			{/each}
+		{/if}
 	</div>
 	<Pagination {totalResults} />
 {:else}

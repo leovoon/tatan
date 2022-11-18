@@ -22,11 +22,9 @@
 		};
 		try {
 			if (!navigator.canShare(shareData)) throw new Error('Your browser does not support.');
-			navigator.share(shareData);
+			await navigator.share(shareData);
 		} catch (error) {
-			alert(
-				'You probably share from an unsecured context. It is not supported. Contact the developer for more information. @leovoon'
-			);
+			alert('Please open in a secured browser.');
 		}
 	};
 

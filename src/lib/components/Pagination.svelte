@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import { page, navigating } from '$app/stores';
 
 	export let totalResults: number;
@@ -8,7 +8,9 @@
 	let pageNum = 1;
 	$: query = $page.params.query;
 
-	$: isNavigating = $navigating !== null;
+	$: isNavigating =
+		$navigating !== null && $navigating?.from?.params?.query === $navigating.to?.params?.query;
+
 	$: if (pageNum <= 0 || pageNum > 91) pageNum = 1;
 
 	$: if (+totalResults > pageNum + 10 && pageNum + 10 <= 91) {
@@ -75,6 +77,10 @@
 
 	button:hover {
 		background-color: #eee;
+	}
+
+	button[disabled]:hover {
+		background-color: white;
 	}
 
 	span {

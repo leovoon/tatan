@@ -1,12 +1,18 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import githubIcon from '$lib/assets/github.svg';
-	import { page } from '$app/stores';
+	import { page, navigating } from '$app/stores';
 	import './global.css';
 	import type { LayoutServerData } from './$types';
+	import SplashLoading from '$lib/components/SplashLoading.svelte';
 
 	let search: '';
 	export let data: LayoutServerData;
+
+	$: isNavigating =
+		$navigating !== null &&
+		$navigating.from?.route.id === '/' &&
+		$navigating.to?.params?.query === search;
 
 	const handleQuery = () => {
 		if (!search) {
@@ -18,6 +24,10 @@
 		goto(`/${search}`, { replaceState: true });
 	};
 </script>
+
+{#if isNavigating}
+	<SplashLoading />
+{/if}
 
 <div class="container">
 	<nav>
@@ -51,6 +61,10 @@
 	.container {
 		width: 600px;
 		max-width: 65ch;
+		height: 100%;
+		position: relative;
+		z-index: 97;
+		pointer-events: auto;
 	}
 	main {
 		padding: 2em;
@@ -66,6 +80,7 @@
 		align-items: center;
 		background-color: aliceblue;
 		z-index: 99;
+		pointer-events: auto;
 	}
 
 	.saved {

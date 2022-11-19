@@ -9,7 +9,7 @@
 
 	$: totalResults = +data.tatan.queries.request[0].totalResults;
 
-	$: isNavigating = $navigating !== null;
+	$: isNavigating = $navigating !== null && $navigating.from?.route.id === '/[query]';
 </script>
 
 {#if data.tatan.error}

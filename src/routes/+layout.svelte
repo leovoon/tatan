@@ -109,7 +109,7 @@
 			transform;
 		transition-duration: 150ms;
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-		color: #9ca3af;
+		color: #626974;
 		border-radius: 0.375rem;
 		border-width: 1px;
 		border-color: #d1d5db;
@@ -140,7 +140,7 @@
 		padding: 1rem;
 		margin-bottom: 120px;
 		column-gap: 1rem;
-		color: slategrey;
+		color: #626974;
 	}
 
 	@media (max-width: 640px) {

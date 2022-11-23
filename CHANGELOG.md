@@ -1,5 +1,18 @@
 
 
+## [0.4.0](https://github.com/leovoon/tatan/compare/0.3.1...0.4.0) (2022-11-23)
+
+
+### Features
+
+* Add meta, fix accessibility ([dd95511](https://github.com/leovoon/tatan/commit/dd95511283bdde9e205f71836f23131f0eaac5fc))
+
+
+### Bug Fixes
+
+* Remove needless skeleton ([2e1e1d1](https://github.com/leovoon/tatan/commit/2e1e1d13c688931b4df6e386122445a4c5ff23ec))
+* Update error lines ([665bc6e](https://github.com/leovoon/tatan/commit/665bc6e530bac552f3e13ad75dacab2493e25931))
+
 ### [0.3.1](https://github.com/leovoon/tatan/compare/0.3.0...0.3.1) (2022-11-18)
 
 

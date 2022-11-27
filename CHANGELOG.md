@@ -1,5 +1,12 @@
 
 
+## [0.5.0](https://github.com/leovoon/tatan/compare/0.4.0...0.5.0) (2022-11-27)
+
+
+### Features
+
+* add gif to saved, remove and delete all ([c8e02c6](https://github.com/leovoon/tatan/commit/c8e02c61a7e51456dced700cdec67fb3906e66f9))
+
 ## [0.4.0](https://github.com/leovoon/tatan/compare/0.3.1...0.4.0) (2022-11-23)
 
 

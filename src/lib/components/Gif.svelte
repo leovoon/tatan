@@ -1,8 +1,20 @@
 <script lang="ts">
-	export let gifImg: string;
 	import { page } from '$app/stores';
+	import { createEventDispatcher } from 'svelte';
 	import imageFailedSVG from '$lib/assets/imageFailed.svg';
+	import LikeButton from './LikeButton.svelte';
+
+	import { savedGifs } from '$lib/store';
+
+	export let gifImg: string;
+	export let id: number;
+	export let likable: boolean = false;
+
 	$: query = $page.params.query;
+	$: localStorageGifs = $savedGifs.length ? $savedGifs : [];
+	$: isSaved = localStorageGifs.includes(gifImg) || false;
+
+	const dispatch = createEventDispatcher();
 
 	const getFileFromUrl = async (url: string, defaultFileFormat = 'image/gif') => {
 		const response = await fetch(url, { mode: 'cors' });
@@ -22,6 +34,7 @@
 		};
 		if (!navigator.canShare(shareData)) alert('Your browser does not support.');
 		await navigator.share(shareData);
+		dispatch('gifSelected', { url: gifImg });
 	};
 
 	const handleImageLoadFailed = (e: Event) => {
@@ -29,9 +42,22 @@
 		target.src = imageFailedSVG;
 		target.onerror = null;
 	};
+
+	const handleSaveTatan = () => {
+		if (isSaved) {
+			savedGifs.update((gifs) => gifs.filter((gif) => gif !== gifImg));
+			return;
+		}
+		savedGifs.set([...$savedGifs, gifImg]);
+	};
 </script>
 
 <div class="gif" on:click={handleClick} on:keydown={handleClick}>
+	{#if likable}
+		<button on:click|stopPropagation>
+			<LikeButton liked={isSaved} id={'like-' + id} on:change={handleSaveTatan} />
+		</button>
+	{/if}
 	<img
 		src={gifImg}
 		on:error={handleImageLoadFailed}
@@ -50,6 +76,7 @@
 		padding: 0.2rem;
 		min-height: max-content;
 		cursor: pointer;
+		position: relative;
 	}
 
 	.gif > img {
@@ -61,5 +88,21 @@
 		background-position: center;
 		background-repeat: no-repeat;
 		background-image: url('$lib/assets/loading.webp');
+	}
+
+	button {
+		--likeButtonWidth: 26px;
+		--likeButtonBackgroundColor: rgba(210, 166, 166, 0.296)
+		background-color: var(--likeButtonBackgroundColor);
+		border: none;
+		position: absolute;
+		display: grid;
+		place-content: center;
+		bottom: 0;
+		right: 0;
+		border: solid 1px var(--likeButtonBackgroundColor);
+		border-radius: 10px;
+		max-width: var(--likeButtonWidth);
+		max-height: var(--likeButtonWidth);
 	}
 </style>

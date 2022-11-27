@@ -15,14 +15,14 @@
 {#if data.tatan.error}
 	<Info>{data.tatan.error.status === 'RESOURCE_EXHAUSTED' ? '明天再来吧。' : '出错了'}</Info>
 {:else if data.tatan.items}
-	<div class="container">
+	<div class="gifsContainer">
 		{#if isNavigating}
 			{#each Array(10) as _, i}
 				<GifSkeleton />
 			{/each}
 		{:else}
-			{#each data.tatan.items as { link }}
-				<Gif gifImg={link} />
+			{#each data.tatan.items as { link }, key}
+				<Gif gifImg={link} id={key} likable />
 			{/each}
 		{/if}
 	</div>
@@ -32,7 +32,7 @@
 {/if}
 
 <style>
-	.container {
+	:global(.gifsContainer) {
 		display: grid;
 		gap: 10px;
 		grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
@@ -40,7 +40,7 @@
 	}
 
 	@media (min-width: 500px) {
-		.container {
+		:global(.gifsContainer) {
 			grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
 		}
 	}

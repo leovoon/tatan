@@ -88,5 +88,8 @@
 				}
 			}
 		}
+	},
+	"dependencies": {
+		"svelte-local-storage-store": "^0.3.1"
 	}
 }

@@ -98,7 +98,7 @@
 		position: absolute;
 		display: grid;
 		place-content: center;
-		bottom: 0;
+		top: 0;
 		right: 0;
 		border: solid 1px var(--likeButtonBackgroundColor);
 		border-radius: 10px;

@@ -1,6 +1,7 @@
 import type { PageServerLoad } from './$types';
 import type { TatanSearchResponse } from '$lib/types/Tatan';
 import { getTatan } from '$lib/modules/tatan.service';
+import { error } from '@sveltejs/kit';
 export const load: PageServerLoad = async ({
 	params,
 	url,
@@ -11,6 +12,12 @@ export const load: PageServerLoad = async ({
 	const pageNum = urlSearchParam ? +urlSearchParam : 1;
 
 	const response = await getTatan(query, pageNum);
+
+	if (!response.ok) {
+		throw error(404, {
+			message: '获取资源时报错了，请稍后再试，或者联系管理员。'
+		});
+	}
 
 	setHeaders({
 		// '1 hour'

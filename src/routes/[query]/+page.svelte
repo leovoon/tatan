@@ -31,8 +31,8 @@
 	<Info>没有找到，你可能试下中文 😶‍🌫️</Info>
 {/if}
 
-<style>
-	:global(.gifsContainer) {
+<style global>
+	.gifsContainer {
 		display: grid;
 		gap: 10px;
 		grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
@@ -40,7 +40,7 @@
 	}
 
 	@media (min-width: 500px) {
-		:global(.gifsContainer) {
+		.gifsContainer {
 			grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
 		}
 	}

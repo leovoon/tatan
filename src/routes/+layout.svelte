@@ -5,14 +5,22 @@
 	import './global.css';
 	import type { LayoutServerData } from './$types';
 	import SplashLoading from '$lib/components/SplashLoading.svelte';
+	import SearchKeyword from '$lib/components/SearchKeyword.svelte';
+	import { savedKeywords } from '$lib/store';
 
-	let search: '';
 	export let data: LayoutServerData;
+	let search: string = '';
+	let keywordDiv: HTMLDivElement;
+	let maxKeywords: number = 3;
 
 	$: isNavigating =
 		$navigating !== null &&
 		$navigating.from?.route.id === '/' &&
 		$navigating.to?.params?.query === search;
+
+	$: hasKeywords = $savedKeywords.length > 0;
+
+	// $: firstFiveKeywords =;
 
 	const handleQuery = () => {
 		if (!search) {
@@ -22,26 +30,53 @@
 		if (search === $page.params.query) return;
 
 		goto(`/${search}`, { replaceState: true });
+		addKeyword(search);
 	};
+
+	const addKeyword = (keyword: string) => {
+		const newSet: Set<string> = new Set([]);
+		newSet.add(keyword);
+
+		savedKeywords.set([...Array.from(newSet), ...$savedKeywords]);
+	};
+
+	$: {
+		if (keywordDiv) {
+			const childrenWidths = Array.from(keywordDiv.children, (child) => child.clientWidth);
+			const totalWidth = childrenWidths.reduce((a, b) => a + b, 0);
+			const maxWidth = keywordDiv.clientWidth;
+			if (totalWidth > maxWidth / 2) {
+				maxKeywords = keywordDiv.childElementCount - 1;
+			}
+		}
+	}
 </script>
 
 {#if isNavigating}
 	<SplashLoading />
 {/if}
-
 <div class="container">
 	<nav>
-		<a class="saved" href="/saved">⭐️</a>
+		{#if hasKeywords}
+			<div class="searchKeywords" bind:this={keywordDiv}>
+				{#each $savedKeywords.slice(0, maxKeywords) as keyword}
+					<SearchKeyword {keyword} />
+				{/each}
 
-		<div class="inputWrapper">
-			<input
-				type="text"
-				on:change={() => handleQuery()}
-				placeholder="Search tatan.."
-				bind:value={search}
-			/>
+				{#if $savedKeywords.length > maxKeywords}
+					<SearchKeyword keyword="..." />
+				{/if}
+			</div>
+		{/if}
+
+		<div class="searchBar">
+			<a class="saved" href="/saved">⭐️</a>
+
+			<div class="inputWrapper">
+				<input type="text" maxlength="5" placeholder="Search tatan.." bind:value={search} />
+			</div>
+			<button on:click={() => handleQuery()}>🔍</button>
 		</div>
-		<button on:click={() => handleQuery()}>🔍</button>
 	</nav>
 
 	<main>
@@ -72,15 +107,34 @@
 	nav {
 		width: 100%;
 		max-width: 100vw;
-		height: 80px;
+		height: max-content;
+		min-height: max-content;
 		max-height: 20vh;
 		border-bottom: 1px solid rgba(250, 128, 114, 0.259);
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		flex-direction: column;
+		justify-content: center;
 		background-color: aliceblue;
 		z-index: 99;
 		pointer-events: auto;
+	}
+
+	.searchKeywords {
+		order: 2;
+		position: relative;
+		padding: 1em;
+		gap: 1em;
+		display: grid;
+		align-items: center;
+		background-color: #fefefe;
+		grid-template-columns: repeat(auto-fit, minmax(30px, max-content));
+	}
+
+	.searchBar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		order: 1;
 	}
 
 	.saved {
@@ -160,6 +214,10 @@
 		input {
 			font-size: 0.875rem;
 			line-height: 1.25rem;
+		}
+
+		.searchBar {
+			order: 2;
 		}
 	}
 </style>

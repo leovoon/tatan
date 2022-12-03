@@ -1,5 +1,22 @@
 
 
+## [0.6.0](https://github.com/leovoon/tatan/compare/0.5.0...0.6.0) (2022-12-03)
+
+
+### Features
+
+* Add search history, use edge ([3f698f0](https://github.com/leovoon/tatan/commit/3f698f0fdebe790702efe0283a07dd967a8f07b9))
+
+
+### Bug Fixes
+
+* Add service error handling ([d22605f](https://github.com/leovoon/tatan/commit/d22605f94ea3e268e418d4d293d58e1a2e277b29))
+
+
+### Styles
+
+* Change like button to top right ([90a80d5](https://github.com/leovoon/tatan/commit/90a80d580b7bbde00e4309bde996970a5fd362a1))
+
 ## [0.5.0](https://github.com/leovoon/tatan/compare/0.4.0...0.5.0) (2022-11-27)
 
 

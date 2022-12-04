@@ -70,7 +70,7 @@
 		{/if}
 
 		<div class="searchBar">
-			<a class="saved" href="/saved">⭐️</a>
+			<a class="saved" data-sveltekit-preload-code="eager" href="/saved">⭐️</a>
 
 			<div class="inputWrapper">
 				<input type="text" maxlength="5" placeholder="Search tatan.." bind:value={search} />

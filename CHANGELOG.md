@@ -1,5 +1,18 @@
 
 
+### [0.6.1](https://github.com/leovoon/tatan/compare/0.6.0...0.6.1) (2022-12-04)
+
+
+### Bug Fixes
+
+* Fix some navigation issue ([5442e75](https://github.com/leovoon/tatan/commit/5442e759726d681e4e4a044f752050591b1fc760))
+* sveltekit body ([87f7afb](https://github.com/leovoon/tatan/commit/87f7afb3dee1b347719302954828507673e3511c))
+
+
+### Styles
+
+* Fix body space ([f2a04e8](https://github.com/leovoon/tatan/commit/f2a04e8445a6e5f393a4a37aa9ca66ef2c690f82))
+
 ## [0.6.0](https://github.com/leovoon/tatan/compare/0.5.0...0.6.0) (2022-12-03)
 
 

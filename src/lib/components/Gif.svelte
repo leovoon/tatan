@@ -1,14 +1,19 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import imageFailedSVG from '$lib/assets/imageFailed.svg';
-	import LikeButton from './LikeButton.svelte';
-
 	import { savedGifs } from '$lib/store';
+	import type { ComponentType } from 'svelte';
 
 	export let gifImg: string;
 	export let id: number;
 	export let likable: boolean = false;
+
+	let likeButton: ComponentType;
+
+	onMount(async () => {
+		likeButton = (await import('$lib/components/LikeButton.svelte')).default;
+	});
 
 	$: query = $page.params.query;
 	$: localStorageGifs = $savedGifs.length ? $savedGifs : [];
@@ -55,7 +60,12 @@
 <div class="gif" on:click={handleClick} on:keydown={handleClick}>
 	{#if likable}
 		<button on:click|stopPropagation>
-			<LikeButton liked={isSaved} id={'like-' + id} on:change={handleSaveTatan} />
+			<svelte:component
+				this={likeButton}
+				liked={isSaved}
+				id={'like-' + id}
+				on:change={handleSaveTatan}
+			/>
 		</button>
 	{/if}
 	<img

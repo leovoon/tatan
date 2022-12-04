@@ -27,12 +27,12 @@
 
 	const handleNext = () => {
 		pageNum += 10;
-		goto(`/${query}?page=${pageNum}`);
+		goto(`/${query}?page=${pageNum}`, { noScroll: true });
 	};
 
 	const handlePrevious = () => {
 		pageNum -= 10;
-		goto(`/${query}?page=${pageNum}`);
+		goto(`/${query}?page=${pageNum}`, { noScroll: true });
 	};
 </script>
 

@@ -10,7 +10,7 @@
 			goto('/searchHistory');
 			return;
 		}
-		goto(`${base}${keyword}`);
+		goto(`${base}${keyword}`, { replaceState: true });
 	};
 
 	$: active = $page.params.query === keyword;

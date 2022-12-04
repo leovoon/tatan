@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import { beforeNavigate, goto } from '$app/navigation';
 	import githubIcon from '$lib/assets/github.svg';
 	import { page, navigating } from '$app/stores';
 	import './global.css';
@@ -18,16 +18,20 @@
 		$navigating.from?.route.id === '/' &&
 		$navigating.to?.params?.query === search;
 
-	$: hasKeywords = $savedKeywords.length > 0;
+	$: beforeNavigate(() => {
+		if ($navigating?.from?.url.origin !== $navigating?.to?.url.origin) {
+			isNavigating = false;
+		}
+	});
 
-	// $: firstFiveKeywords =;
+	$: hasKeywords = $savedKeywords.length > 0;
 
 	const handleQuery = () => {
 		if (!search) {
 			alert('人生不留空白哦 ❤️ ');
 			return;
 		}
-		if (search === $page.params.query) return;
+		if (search === $page.params.query || search === 'saved' || search === '...') return;
 
 		goto(`/${search}`, { replaceState: true });
 		addKeyword(search);
@@ -69,14 +73,14 @@
 			</div>
 		{/if}
 
-		<div class="searchBar">
+		<form action={search} on:submit={handleQuery} class="searchBar">
 			<a class="saved" data-sveltekit-preload-code="eager" href="/saved">⭐️</a>
 
 			<div class="inputWrapper">
 				<input type="text" maxlength="5" placeholder="Search tatan.." bind:value={search} />
 			</div>
-			<button on:click={() => handleQuery()}>🔍</button>
-		</div>
+			<button type="submit">🔍</button>
+		</form>
 	</nav>
 
 	<main>

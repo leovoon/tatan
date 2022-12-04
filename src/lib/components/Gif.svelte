@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { createEventDispatcher, onMount } from 'svelte';
+	import { createEventDispatcher, onMount, type ComponentType } from 'svelte';
 	import imageFailedSVG from '$lib/assets/imageFailed.svg';
 	import { savedGifs } from '$lib/store';
-	import type { ComponentType } from 'svelte';
 
 	export let gifImg: string;
 	export let id: number;

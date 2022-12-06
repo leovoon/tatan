@@ -1,8 +1,8 @@
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 import type { TatanSearchResponse } from '$lib/types/Tatan';
 import { getTatan } from '$lib/modules/tatan.service';
 import { error } from '@sveltejs/kit';
-export const load: PageServerLoad = async ({
+export const load: LayoutServerLoad = async ({
 	params,
 	url,
 	setHeaders

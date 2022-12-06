@@ -4,17 +4,8 @@
 	import Info from '$lib/components/Info.svelte';
 	import GifSkeleton from '$lib/components/GifSkeleton.svelte';
 	import { navigating } from '$app/stores';
-	import { onMount, type ComponentType } from 'svelte';
 
 	export let data: PageData;
-
-	let pagination: ComponentType;
-
-	onMount(async () => {
-		pagination = (await import('$lib/components/Pagination.svelte')).default;
-	});
-
-	$: totalResults = +data.tatan.queries.request[0].totalResults;
 
 	$: isNavigating = $navigating !== null && $navigating.from?.route.id === '/[query]';
 </script>
@@ -33,7 +24,6 @@
 			{/each}
 		{/if}
 	</div>
-	<svelte:component this={pagination} {totalResults} />
 {:else}
 	<Info>没有找到，你可能试下中文 😶‍🌫️</Info>
 {/if}

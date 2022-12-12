@@ -1,5 +1,17 @@
 
 
+### [0.6.2](https://github.com/leovoon/tatan/compare/0.6.1...0.6.2) (2022-12-12)
+
+
+### Bug Fixes
+
+* Fix fetch CORS ([e9078f9](https://github.com/leovoon/tatan/commit/e9078f9aa3a59568ca942a45aa511ff230bf6a12))
+
+
+### Styles
+
+* No highlight on tap ([f7d1796](https://github.com/leovoon/tatan/commit/f7d1796dc2d54e26e73a8916f782146d8c4b5c40))
+
 ### [0.6.1](https://github.com/leovoon/tatan/compare/0.6.0...0.6.1) (2022-12-04)
 
 

@@ -3,12 +3,14 @@
 	import { createEventDispatcher, onMount, type ComponentType } from 'svelte';
 	import imageFailedSVG from '$lib/assets/imageFailed.svg';
 	import { savedGifs } from '$lib/store';
+	import { base } from '$app/paths';
 
 	export let gifImg: string;
 	export let id: number;
 	export let likable: boolean = false;
 
 	let likeButton: ComponentType;
+	let controller: AbortController;
 
 	onMount(async () => {
 		likeButton = (await import('$lib/components/LikeButton.svelte')).default;
@@ -21,7 +23,8 @@
 	const dispatch = createEventDispatcher();
 
 	const getFileFromUrl = async (url: string, defaultFileFormat = 'image/gif') => {
-		const response = await fetch(url, { mode: 'cors' });
+		controller = new AbortController();
+		const response = await fetch(`${base}/api/get-image?url=${url}`, { signal: controller.signal });
 		const data = await response.blob();
 
 		return new File([data], url, {
@@ -30,6 +33,7 @@
 	};
 
 	const handleClick = async () => {
+		if (controller) controller.abort();
 		const file = await getFileFromUrl(gifImg);
 		const shareData = {
 			files: [file],

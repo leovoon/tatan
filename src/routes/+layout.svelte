@@ -32,6 +32,7 @@
 		if (!input) {
 			alert('人生不留空白哦 ❤️ ');
 			flag = false;
+			return;
 		}
 
 		if (input.length > 4 || !reg.test(input)) {

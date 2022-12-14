@@ -4,6 +4,7 @@
 	import imageFailedSVG from '$lib/assets/imageFailed.svg';
 	import { savedGifs } from '$lib/store';
 	import { base } from '$app/paths';
+	import { toast } from '$lib/store';
 
 	export let gifImg: string;
 	export let id: number;
@@ -24,17 +25,28 @@
 
 	const getFileFromUrl = async (url: string, defaultFileFormat = 'image/gif') => {
 		controller = new AbortController();
-		const response = await fetch(`${base}/api/get-image?url=${url}`, { signal: controller.signal });
-		const data = await response.blob();
-
-		return new File([data], url, {
-			type: response.headers.get('content-type') || defaultFileFormat
-		});
+		try {
+			$toast = true;
+			const response = await fetch(`${base}/api/get-image?url=${url}`, {
+				signal: controller.signal
+			});
+			const data = await response.blob();
+			if (!data) return;
+			return new File([data], url, {
+				type: response.headers.get('content-type') || defaultFileFormat
+			});
+		} catch (error) {
+			if (error === 'AbortError') return;
+			throw error;
+		} finally {
+			$toast = false;
+		}
 	};
 
 	const handleClick = async () => {
 		if (controller) controller.abort();
 		const file = await getFileFromUrl(gifImg);
+		if (!file) return;
 		const shareData = {
 			files: [file],
 			title: '',

@@ -45,7 +45,7 @@
 	const handleQuery = (e: Event) => {
 		e.preventDefault();
 		const valid = checkLenAndIsChinese(search);
-		if (!valid) return;
+		if (!valid || search === $page.params.query) return;
 		goto(`/${search}`, { replaceState: true });
 		addKeyword(search);
 	};

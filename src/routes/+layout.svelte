@@ -26,13 +26,25 @@
 
 	$: hasKeywords = $savedKeywords.length > 0;
 
-	const handleQuery = () => {
-		if (!search) {
+	const checkLenAndIsChinese = (input: string) => {
+		const reg = /^[\u4e00-\u9fa5]+$/;
+		let flag = true;
+		if (!input) {
 			alert('人生不留空白哦 ❤️ ');
-			return;
+			flag = false;
 		}
-		if (search === $page.params.query || search === 'saved' || search === '...') return;
 
+		if (input.length > 4 || !reg.test(input)) {
+			alert('输入关键字只能是中文，不能加载除中文以外的文字符号 ❌');
+			flag = false;
+		}
+		return flag;
+	};
+
+	const handleQuery = (e: Event) => {
+		e.preventDefault();
+		const valid = checkLenAndIsChinese(search);
+		if (!valid) return;
 		goto(`/${search}`, { replaceState: true });
 		addKeyword(search);
 	};

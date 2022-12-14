@@ -1,5 +1,23 @@
 
 
+## [0.7.0](https://github.com/leovoon/tatan/compare/0.6.2...0.7.0) (2022-12-14)
+
+
+### Features
+
+* Add toast while getting image ready ([1c44beb](https://github.com/leovoon/tatan/commit/1c44beb321b49ede465ce28fe2c8d8776c566da1))
+* Chinese characters are allowed only ([3460bd3](https://github.com/leovoon/tatan/commit/3460bd352fc89cbd78d7c885fe3158aae6b2e5f9))
+
+
+### Bug Fixes
+
+* Fix double alert ([0337071](https://github.com/leovoon/tatan/commit/0337071a9562e7d0f172bd4ca8ebca3fd0ab6e13))
+
+
+### Styles
+
+* Fix splash loading ([f6e4328](https://github.com/leovoon/tatan/commit/f6e43283d6fc29abbbff2d1af0507e4872368b0d))
+
 ### [0.6.2](https://github.com/leovoon/tatan/compare/0.6.1...0.6.2) (2022-12-12)
 
 

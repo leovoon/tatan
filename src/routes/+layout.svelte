@@ -1,4 +1,5 @@
 <script lang="ts">
+	import z from 'zod';
 	import { beforeNavigate, goto } from '$app/navigation';
 	import githubIcon from '$lib/assets/github.svg';
 	import { page, navigating } from '$app/stores';
@@ -13,33 +14,27 @@
 	let keywordDiv: HTMLDivElement;
 	let maxKeywords: number = 3;
 
-	$: isNavigating =
-		$navigating !== null &&
-		$navigating.from?.route.id === '/' &&
-		$navigating.to?.params?.query === search;
-
-	$: beforeNavigate(() => {
-		if ($navigating?.from?.url.origin !== $navigating?.to?.url.origin) {
-			isNavigating = false;
-		}
-	});
-
-	$: hasKeywords = $savedKeywords.length > 0;
-
 	const checkLenAndIsChinese = (input: string) => {
-		const reg = /^[\u4e00-\u9fa5]+$/;
-		let flag = true;
-		if (!input) {
-			alert('人生不留空白哦 ❤️ ');
-			flag = false;
-			return;
+		const chineseRegex = /^[\u4e00-\u9fa5]+$/;
+		const chinese = z.string().refine((val) => chineseRegex.test(val), {
+			message: '输入关键字只能是中文，不能加载除中文以外的文字符号 ❌',
+			path: ['search']
+		});
+
+		if (input.length === 0) {
+			alert('生命不留空白 ❌');
+			return false;
 		}
 
-		if (input.length > 4 || !reg.test(input)) {
-			alert('输入关键字只能是中文，不能加载除中文以外的文字符号 ❌');
-			flag = false;
+		try {
+			chinese.parse(input);
+		} catch (e) {
+			if (e instanceof z.ZodError) {
+				alert(e.flatten().fieldErrors?.search?.[0]);
+				return false;
+			}
 		}
-		return flag;
+		return true;
 	};
 
 	const handleQuery = (e: Event) => {
@@ -56,6 +51,19 @@
 
 		savedKeywords.set([...Array.from(newSet), ...$savedKeywords]);
 	};
+
+	$: isNavigating =
+		$navigating !== null &&
+		$navigating.from?.route.id === '/' &&
+		$navigating.to?.params?.query === search;
+
+	$: beforeNavigate(() => {
+		if ($navigating?.from?.url.origin !== $navigating?.to?.url.origin) {
+			isNavigating = false;
+		}
+	});
+
+	$: hasKeywords = $savedKeywords.length > 0;
 
 	$: {
 		if (keywordDiv) {

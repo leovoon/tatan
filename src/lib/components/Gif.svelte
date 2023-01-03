@@ -13,14 +13,6 @@
 	let likeButton: ComponentType;
 	let controller: AbortController;
 
-	onMount(async () => {
-		likeButton = (await import('$lib/components/LikeButton.svelte')).default;
-	});
-
-	$: query = $page.params.query;
-	$: localStorageGifs = $savedGifs.length ? $savedGifs : [];
-	$: isSaved = localStorageGifs.includes(gifImg) || false;
-
 	const dispatch = createEventDispatcher();
 
 	const getFileFromUrl = async (url: string, defaultFileFormat = 'image/gif') => {
@@ -70,6 +62,14 @@
 		}
 		savedGifs.set([...$savedGifs, gifImg]);
 	};
+
+	$: query = $page.params.query;
+	$: localStorageGifs = $savedGifs.length ? $savedGifs : [];
+	$: isSaved = localStorageGifs.includes(gifImg) || false;
+
+	onMount(async () => {
+		likeButton = (await import('$lib/components/LikeButton.svelte')).default;
+	});
 </script>
 
 <div class="gif" on:click={handleClick} on:keydown={handleClick}>

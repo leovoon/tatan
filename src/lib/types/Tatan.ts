@@ -1,7 +1,3 @@
-export interface TatanSearchResponse {
-	tatan: Tatan;
-}
-
 export interface Tatan {
 	kind: string;
 	url: Url;

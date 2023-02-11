@@ -1,12 +1,8 @@
+import type { Tatan } from '$lib/types/Tatan';
 import type { LayoutServerLoad } from './$types';
-import type { TatanSearchResponse } from '$lib/types/Tatan';
 import { getTatan } from '$lib/modules/tatan.service';
 import { error } from '@sveltejs/kit';
-export const load: LayoutServerLoad = async ({
-	params,
-	url,
-	setHeaders
-}): Promise<TatanSearchResponse> => {
+export const load: LayoutServerLoad = async ({ params, url, setHeaders }) => {
 	const { query } = params;
 	const urlSearchParam = url.searchParams.get('page');
 	const pageNum = urlSearchParam ? +urlSearchParam : 1;
@@ -19,15 +15,15 @@ export const load: LayoutServerLoad = async ({
 		});
 	}
 
+	const tatan = (await response.json()) as Tatan;
+
 	setHeaders({
 		// '1 hour'
 		'Cache-Control': 'max-age=3600',
 		age: response.headers.get('age') || '0'
 	});
 
-	const tatan = await response.json();
-
 	return {
-		tatan: tatan
+		tatan
 	};
 };

@@ -46,10 +46,12 @@
 	};
 
 	const addKeyword = (keyword: string) => {
-		const newSet: Set<string> = new Set([]);
-		newSet.add(keyword);
+		const newKeywords = new Set([...$savedKeywords]);
 
-		savedKeywords.set([...Array.from(newSet), ...$savedKeywords]);
+		if (!newKeywords.has(keyword)) {
+			newKeywords.add(keyword);
+			savedKeywords.set(Array.from(newKeywords).reverse());
+		}
 	};
 
 	$: isNavigating =

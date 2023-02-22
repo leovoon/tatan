@@ -1,14 +1,12 @@
 <script lang="ts">
 	import { onMount, type ComponentType } from 'svelte';
-	import type { LayoutServerData } from './$types';
+	import { page } from '$app/stores';
 	import { toast } from '$lib/store';
 	import { fly } from 'svelte/transition';
 
-	export let data: LayoutServerData;
-
 	let pagination: ComponentType;
 
-	$: totalResults = +data.tatan.queries.request[0].totalResults;
+	$: totalResults = $page.data?.totalResults;
 
 	onMount(async () => {
 		pagination = (await import('$lib/components/Pagination.svelte')).default;

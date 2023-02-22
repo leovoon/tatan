@@ -6,10 +6,9 @@
 	let showPrevious = false;
 	let showNext = false;
 	let pageNum = 1;
-	$: query = $page.params.query;
 
-	$: isNavigating =
-		$navigating !== null && $navigating?.from?.params?.query === $navigating.to?.params?.query;
+	$: isNavigating = $navigating !== null;
+	$: query = $page.params.query;
 
 	$: if (pageNum <= 0 || pageNum > 91) pageNum = 1;
 

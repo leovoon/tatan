@@ -1,11 +1,10 @@
 <script lang="ts">
 	import z from 'zod';
-	import { beforeNavigate, goto } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import githubIcon from '$lib/assets/github.svg';
 	import { page, navigating } from '$app/stores';
 	import './global.css';
 	import type { LayoutServerData } from './$types';
-	import SplashLoading from '$lib/components/SplashLoading.svelte';
 	import SearchKeyword from '$lib/components/SearchKeyword.svelte';
 	import { savedKeywords } from '$lib/store';
 
@@ -54,17 +53,6 @@
 		}
 	};
 
-	$: isNavigating =
-		$navigating !== null &&
-		$navigating.from?.route.id === '/' &&
-		$navigating.to?.params?.query === search;
-
-	$: beforeNavigate(() => {
-		if ($navigating?.from?.url.origin !== $navigating?.to?.url.origin) {
-			isNavigating = false;
-		}
-	});
-
 	$: hasKeywords = $savedKeywords.length > 0;
 
 	$: {
@@ -79,9 +67,6 @@
 	}
 </script>
 
-{#if isNavigating}
-	<SplashLoading />
-{/if}
 <div class="container">
 	<nav>
 		{#if hasKeywords}

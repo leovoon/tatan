@@ -3,30 +3,28 @@
 	import Gif from '$lib/components/Gif.svelte';
 	import Info from '$lib/components/Info.svelte';
 	import GifSkeleton from '$lib/components/GifSkeleton.svelte';
-	import { navigating } from '$app/stores';
 
 	export let data: PageData;
-
-	$: isNavigating = $navigating !== null && $navigating.from?.route.id === '/[query]';
 </script>
 
-{#if data.tatan.error}
-	<Info>{data.tatan.error.status === 'RESOURCE_EXHAUSTED' ? '明天再来吧。' : '出错了'}</Info>
-{:else if data.tatan.items}
+{#await data.lazy.tatan}
 	<div class="gifsContainer">
-		{#if isNavigating}
-			{#each Array(10) as _, i}
-				<GifSkeleton />
-			{/each}
-		{:else}
-			{#each data.tatan.items as { link }, key}
-				<Gif gifImg={link} id={key} likable />
-			{/each}
-		{/if}
+		{#each Array(10) as _, i}
+			<GifSkeleton />
+		{/each}
 	</div>
-{:else}
-	<Info>没有找到，你可能试下中文 😶‍🌫️</Info>
-{/if}
+{:then { items, error }}
+	<div class="gifsContainer">
+		{#each items as { link }, key}
+			<Gif gifImg={link} id={key} likable />
+		{/each}
+	</div>
+	{#if error}
+		<Info>没找到 - {error.message}</Info>
+	{/if}
+{:catch error}
+	<Info>出错了 - {error.message}</Info>
+{/await}
 
 <style global>
 	.gifsContainer {

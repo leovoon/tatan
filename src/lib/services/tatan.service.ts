@@ -18,6 +18,11 @@ export const getTatan = async (
 			}
 		}
 	);
+	if (response.status === 429) {
+		throw error(429, {
+			message: '请求过于频繁，请明天再来。'
+		});
+	}
 
 	if (!response.ok)
 		throw error(404, {

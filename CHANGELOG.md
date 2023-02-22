@@ -1,5 +1,13 @@
 
 
+### [0.7.1](https://github.com/leovoon/tatan/compare/0.7.0...0.7.1) (2023-02-22)
+
+
+### Bug Fixes
+
+* duplicate keyword ([9ef5613](https://github.com/leovoon/tatan/commit/9ef5613bca0f067854eafee822f6cc30d33504e3))
+* Fix duplicate keyword ([6d1f187](https://github.com/leovoon/tatan/commit/6d1f187067c7bbb73e7021ec8a92da93ea5fe48c))
+
 ## [0.7.0](https://github.com/leovoon/tatan/compare/0.6.2...0.7.0) (2022-12-14)
 
 

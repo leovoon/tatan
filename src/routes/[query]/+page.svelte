@@ -17,6 +17,8 @@
 	<div class="gifsContainer">
 		{#each items as { link }, key}
 			<Gif gifImg={link} id={key} likable />
+		{:else}
+			<Info>没找到,尝试不一样的关键字😊</Info>
 		{/each}
 	</div>
 	{#if error}

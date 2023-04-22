@@ -1,8 +1,8 @@
 import type { Writable } from 'svelte/store';
-import { writable } from 'svelte-local-storage-store';
+import { persisted } from 'svelte-local-storage-store';
 
-export const savedGifs: Writable<string[]> = writable('savedGifs', []);
+export const savedGifs: Writable<string[]> = persisted('savedGifs', []);
 
-export const savedKeywords: Writable<string[]> = writable('savedKeywords', []);
+export const savedKeywords: Writable<string[]> = persisted('savedKeywords', []);
 
-export const toast: Writable<boolean> = writable('toast', false);
+export const toast: Writable<boolean> = persisted('toast', false);

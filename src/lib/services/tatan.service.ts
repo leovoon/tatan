@@ -11,7 +11,7 @@ export const getTatan = async (
 
 	
 	const response = await fetch(
-		`https://customsearch.googleapis.com/customsearch/v1?fields=queries/request(totalResults),items(link,displayLink,image)&key=${API_PRIVATE_KEY}&cx=${SEARCH_ENGINE_ID}&q=tatan${query}&hq=${encodeURIComponent('印尼小胖打蛋')}&gl=cn&hl=zh-CN&lr=lang_zh-TW|lang_zh-CN&c2coff=0&fileType=gif&searchType=image&imgType=animated&alt=json&safe=active&filter=1&start=${page}`,
+		`https://customsearch.googleapis.com/customsearch/v1?fields=queries/request(totalResults),items(link,displayLink,image)&key=${API_PRIVATE_KEY}&cx=${SEARCH_ENGINE_ID}&q=tatan${query}&gl=cn&hl=zh-CN&lr=lang_zh-TW|lang_zh-CN&c2coff=0&fileType=gif&searchType=image&imgType=animated&alt=json&safe=active&filter=1&start=${page}`,
 		{
 			mode: 'cors',
 			headers: {

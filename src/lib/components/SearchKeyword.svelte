@@ -17,7 +17,7 @@
 </script>
 
 {#if keyword}
-	<span role="button" class:active on:keyup={handleKeyword} on:click={handleKeyword}>{keyword}</span
+	<span role="button" tabindex="0" class:active on:keyup={handleKeyword} on:click={handleKeyword}>{keyword}</span
 	>
 {/if}
 

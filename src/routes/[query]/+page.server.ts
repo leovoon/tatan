@@ -1,6 +1,5 @@
-import type { PageServerLoad } from './$types';
 import { getTatan } from '$lib/services/tatan.service';
-export const load: PageServerLoad = async ({ params, url, setHeaders }) => {
+export const load = async ({ params, url, setHeaders }) => {
 	const { query } = params;
 	const urlSearchParam = url.searchParams.get('page');
 	const pageNum = urlSearchParam ? +urlSearchParam : 1;

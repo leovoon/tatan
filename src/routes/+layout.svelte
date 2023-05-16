@@ -2,13 +2,12 @@
 	import z from 'zod';
 	import { goto } from '$app/navigation';
 	import githubIcon from '$lib/assets/github.svg';
-	import { page, navigating } from '$app/stores';
+	import { page } from '$app/stores';
 	import './global.css';
-	import type { LayoutServerData } from './$types';
 	import SearchKeyword from '$lib/components/SearchKeyword.svelte';
 	import { savedKeywords } from '$lib/store';
 
-	export let data: LayoutServerData;
+	export let data
 	let search: string = '';
 	let keywordDiv: HTMLDivElement;
 	let maxKeywords: number = 3;

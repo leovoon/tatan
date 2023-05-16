@@ -1,10 +1,9 @@
 <script lang="ts">
-	import type { PageData } from './$types';
 	import Gif from '$lib/components/Gif.svelte';
 	import Info from '$lib/components/Info.svelte';
 	import GifSkeleton from '$lib/components/GifSkeleton.svelte';
 
-	export let data: PageData;
+	export let data
 </script>
 
 {#await data.lazy.tatan}

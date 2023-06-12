@@ -3,7 +3,7 @@
 	import Info from '$lib/components/Info.svelte';
 	import GifSkeleton from '$lib/components/GifSkeleton.svelte';
 
-	export let data
+	export let data;
 </script>
 
 {#await data.lazy.tatan}

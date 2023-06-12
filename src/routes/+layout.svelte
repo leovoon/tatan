@@ -6,11 +6,14 @@
 	import './global.css';
 	import SearchKeyword from '$lib/components/SearchKeyword.svelte';
 	import { savedKeywords } from '$lib/store';
+	import { pwaInfo } from 'virtual:pwa-info';
+	import { onMount } from 'svelte';
 
-	export let data
+	export let data;
 	let search: string = '';
 	let keywordDiv: HTMLDivElement;
 	let maxKeywords: number = 3;
+	let ReloadPrompt = null;
 
 	const checkLenAndIsChinese = (input: string) => {
 		const chineseRegex = /^[\u4e00-\u9fa5]+$/;
@@ -64,7 +67,18 @@
 			}
 		}
 	}
+
+	$: webManifestLink = pwaInfo ? pwaInfo.webManifest.linkTag : '';
+
+	onMount(async () => {
+		pwaInfo && (ReloadPrompt = (await import('$lib/components/ReloadPrompt.svelte')).default);
+	});
 </script>
+
+<svelte:head>
+	<title>Tatan 世界</title>
+	{@html webManifestLink}
+</svelte:head>
 
 <div class="container">
 	<nav>

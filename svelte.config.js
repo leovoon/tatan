@@ -7,11 +7,13 @@ const config = {
 	// for more information about preprocessors
 	preprocess: preprocess(),
 
-
 	kit: {
 		adapter: adapter({
 			runtime: 'edge'
-		})
+		}),
+		serviceWorker: {
+			register: false
+		}
 	}
 };
 

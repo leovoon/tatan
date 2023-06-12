@@ -21,19 +21,19 @@ const config: UserConfig = {
 				background_color: '#ffffff',
 				icons: [
 					{
-						src: '/tatan.jpg',
+						src: '/tatan.png',
 						sizes: '192x192',
-						type: 'image/jpg'
+						type: 'image/png'
 					},
 					{
-						src: '/tatan.jpg',
+						src: '/tatan.png',
 						sizes: '512x512',
-						type: 'image/jpg'
+						type: 'image/png'
 					},
 					{
-						src: '/tatan.jpg',
+						src: '/tatan.png',
 						sizes: '512x512',
-						type: 'image/jpg',
+						type: 'image/png',
 						purpose: 'any maskable'
 					}
 				]

@@ -103,7 +103,7 @@
 </script>
 
 <svelte:head>
-	<title>Tatan 世界1</title>
+	<title>Tatan 世界</title>
 	{@html webManifestLink}
 </svelte:head>
 
@@ -114,7 +114,6 @@
 		{/if}
 		{#if hasKeywords}
 			<div class="searchKeywords" bind:this={keywordDiv}>
-				<a href="/想起你">test</a>
 				{#each $savedKeywords.slice(0, maxKeywords) as keyword}
 					<SearchKeyword {keyword} />
 				{/each}

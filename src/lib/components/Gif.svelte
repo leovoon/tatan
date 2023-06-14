@@ -8,9 +8,8 @@
 
 	export let gifImg: string;
 	export let id: number;
-	export let likable: boolean = false;
+	export let likeButton: any;
 
-	let likeButton: ComponentType;
 	let controller: AbortController;
 
 	const dispatch = createEventDispatcher();
@@ -66,14 +65,10 @@
 	$: query = $page.params.query;
 	$: localStorageGifs = $savedGifs.length ? $savedGifs : [];
 	$: isSaved = localStorageGifs.includes(gifImg) || false;
-
-	onMount(async () => {
-		likeButton = (await import('$lib/components/LikeButton.svelte')).default;
-	});
 </script>
 
 <div class="gif" on:click={handleClick} on:keydown={handleClick}>
-	{#if likable}
+	{#if likeButton}
 		<button on:click|stopPropagation>
 			<svelte:component
 				this={likeButton}

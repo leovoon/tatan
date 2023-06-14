@@ -65,8 +65,8 @@
 	}
 	svg #heart {
 		transform-origin: center;
-		animation: animateHeartOut 0.3s linear forwards;
 	}
+
 	svg #main-circ {
 		transform-origin: 29.5px 29.5px;
 	}

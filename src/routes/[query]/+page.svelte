@@ -2,8 +2,15 @@
 	import Gif from '$lib/components/Gif.svelte';
 	import Info from '$lib/components/Info.svelte';
 	import GifSkeleton from '$lib/components/GifSkeleton.svelte';
+	import { onMount } from 'svelte';
 
 	export let data;
+
+	let LikeButton: typeof import('$lib/components/LikeButton.svelte')['default'] | null = null;
+
+	onMount(async () => {
+		LikeButton = (await import('$lib/components/LikeButton.svelte')).default;
+	});
 </script>
 
 {#await data.lazy.tatan}
@@ -15,7 +22,7 @@
 {:then { items, error }}
 	<div class="gifsContainer">
 		{#each items as { link }, key}
-			<Gif gifImg={link} id={key} likable />
+			<Gif gifImg={link} id={key} likeButton={LikeButton} />
 		{:else}
 			<Info>没找到,尝试不一样的关键字😊</Info>
 		{/each}

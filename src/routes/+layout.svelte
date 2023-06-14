@@ -8,12 +8,14 @@
 	import { savedKeywords } from '$lib/store';
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { onMount } from 'svelte';
+	import InstallPrompt from '$lib/components/InstallPrompt.svelte';
 
 	export let data;
 	let search: string = '';
 	let keywordDiv: HTMLDivElement;
 	let maxKeywords: number = 3;
 	let ReloadPrompt: typeof import('$lib/components/ReloadPrompt.svelte')['default'] | null = null;
+	let deferredPrompt: any;
 
 	const checkLenAndIsChinese = (input: string) => {
 		const chineseRegex = /^[\u4e00-\u9fa5]+$/;
@@ -72,6 +74,28 @@
 
 	onMount(async () => {
 		pwaInfo && (ReloadPrompt = (await import('$lib/components/ReloadPrompt.svelte')).default);
+
+		window.addEventListener('DOMContentLoaded', async (event) => {
+			if ('BeforeInstallPromptEvent' in window) {
+				console.log('⏳ BeforeInstallPromptEvent supported but not fired yet');
+			} else {
+				console.log('❌ BeforeInstallPromptEvent NOT supported');
+			}
+		});
+
+		window.addEventListener('beforeinstallprompt', (e) => {
+			// Prevents the default mini-infobar or install dialog from appearing on mobile
+			e.preventDefault();
+			// Save the event because you’ll need to trigger it later.
+			deferredPrompt = e;
+			console.log(deferredPrompt, 'ss');
+			// Show your customized install prompt for your PWA
+			console.log('✅ BeforeInstallPromptEvent fired', true);
+		});
+
+		window.addEventListener('appinstalled', (e) => {
+			console.log('✅ AppInstalled fired', true);
+		});
 	});
 </script>
 
@@ -82,6 +106,7 @@
 
 <div class="container">
 	<nav>
+		<InstallPrompt {deferredPrompt} />
 		{#if hasKeywords}
 			<div class="searchKeywords" bind:this={keywordDiv}>
 				{#each $savedKeywords.slice(0, maxKeywords) as keyword}

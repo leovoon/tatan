@@ -32,7 +32,6 @@
 		display: grid;
 		gap: 10px;
 		grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-		grid-template-rows: masonry;
 	}
 
 	@media (min-width: 500px) {

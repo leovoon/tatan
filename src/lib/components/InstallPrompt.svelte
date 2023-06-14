@@ -1,6 +1,5 @@
 <script lang="ts">
 	export let deferredPrompt: any;
-	let installed = false;
 
 	async function installApp() {
 		if (deferredPrompt) {
@@ -12,30 +11,25 @@
 			deferredPrompt = null;
 			// Act on the user's choice
 			if (outcome === 'accepted') {
-				installed = true;
 				console.log('😀 User accepted the install prompt.', true);
 			} else if (outcome === 'dismissed') {
-				installed = false;
 				console.log('😟 User dismissed the install prompt');
 			}
 			// We hide the install button
-			installed = false;
 		}
 	}
 </script>
 
-{#if installed}
-	<div>
-		<button on:click={installApp}> Install </button>
-	</div>
-{/if}
+<div>
+	<button on:click={installApp}> Install </button>
+</div>
 
 <style>
 	div {
 		width: 100%;
 		display: grid;
 		place-content: center;
-		margin-top: 1rem;
+		margin-top: 3rem;
 	}
 	button {
 		background-color: antiquewhite;
@@ -44,5 +38,16 @@
 		font-size: large;
 		border: 0.5px solid darkgoldenrod;
 		border-radius: 30px;
+	}
+
+	@media (max-width: 640px) {
+		div {
+			margin-top: 0;
+			position: fixed;
+			top: 0;
+			right: 0;
+			width: fit-content;
+			padding: 1rem;
+		}
 	}
 </style>

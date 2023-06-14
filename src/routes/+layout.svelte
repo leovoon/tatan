@@ -16,6 +16,8 @@
 	let maxKeywords: number = 3;
 	let ReloadPrompt: typeof import('$lib/components/ReloadPrompt.svelte')['default'] | null = null;
 	let deferredPrompt: any;
+	let pwaInstallable = false;
+	let pwaInstalled = false;
 
 	const checkLenAndIsChinese = (input: string) => {
 		const chineseRegex = /^[\u4e00-\u9fa5]+$/;
@@ -88,24 +90,26 @@
 			e.preventDefault();
 			// Save the event because you’ll need to trigger it later.
 			deferredPrompt = e;
+			pwaInstallable = true;
 			// Show your customized install prompt for your PWA
 			console.log('✅ BeforeInstallPromptEvent fired', true);
 		});
 
 		window.addEventListener('appinstalled', (e) => {
+			pwaInstalled = true;
 			console.log('✅ AppInstalled fired', true);
 		});
 	});
 </script>
 
 <svelte:head>
-	<title>Tatan 世界</title>
+	<title>Tatan 世界1</title>
 	{@html webManifestLink}
 </svelte:head>
 
 <div class="container">
 	<nav>
-		{#if deferredPrompt}
+		{#if pwaInstallable && !pwaInstalled}
 			<InstallPrompt {deferredPrompt} />
 		{/if}
 		{#if hasKeywords}
@@ -141,10 +145,11 @@
 		</a>
 		<small>leovoon</small>
 	</footer>
-	{#if ReloadPrompt}
-		<svelte:component this={ReloadPrompt} />
-	{/if}
 </div>
+
+{#if ReloadPrompt}
+	<svelte:component this={ReloadPrompt} />
+{/if}
 
 <style>
 	.container {
@@ -169,7 +174,7 @@
 		flex-direction: column;
 		justify-content: center;
 		background-color: aliceblue;
-		z-index: 99;
+		z-index: 98;
 		pointer-events: auto;
 	}
 

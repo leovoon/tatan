@@ -15,6 +15,7 @@
 		}
 	});
 	const close = () => {
+		console.log('clicked');
 		offlineReady.set(false);
 		needRefresh.set(false);
 	};
@@ -25,9 +26,9 @@
 	<div class="pwa-toast" role="alert">
 		<div class="message">
 			{#if $offlineReady}
-				<span> App ready to work offline 已可线下使用 </span>
+				<span> 已可线下使用 <br /> App ready to work offline</span>
 			{:else}
-				<span> New Update. Click on reload button to update. 有新的更新，点刷新 </span>
+				<span> 有新的更新，点刷新 <br /> New Update. Click on reload button to update. </span>
 			{/if}
 		</div>
 		{#if $needRefresh}
@@ -39,6 +40,7 @@
 
 <style>
 	.pwa-toast {
+		z-index: 99;
 		position: fixed;
 		right: 0;
 		bottom: 0;
@@ -46,10 +48,10 @@
 		padding: 12px;
 		border: 1px solid #8885;
 		border-radius: 4px;
-		z-index: 2;
 		text-align: left;
 		box-shadow: 3px 4px 5px 0 #8885;
 		background-color: white;
+		pointer-events: auto;
 	}
 	.pwa-toast .message {
 		margin-bottom: 8px;
@@ -60,11 +62,12 @@
 		margin-right: 5px;
 		border-radius: 2px;
 		padding: 3px 10px;
+		position: relative;
 	}
 
 	@media (max-width: 480px) {
 		.pwa-toast {
-			bottom: 5rem;
+			bottom: 6rem;
 		}
 	}
 </style>

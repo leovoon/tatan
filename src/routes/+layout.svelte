@@ -88,7 +88,6 @@
 			e.preventDefault();
 			// Save the event because you’ll need to trigger it later.
 			deferredPrompt = e;
-			console.log(deferredPrompt, 'ss');
 			// Show your customized install prompt for your PWA
 			console.log('✅ BeforeInstallPromptEvent fired', true);
 		});
@@ -106,7 +105,9 @@
 
 <div class="container">
 	<nav>
-		<InstallPrompt {deferredPrompt} />
+		{#if deferredPrompt}
+			<InstallPrompt {deferredPrompt} />
+		{/if}
 		{#if hasKeywords}
 			<div class="searchKeywords" bind:this={keywordDiv}>
 				{#each $savedKeywords.slice(0, maxKeywords) as keyword}

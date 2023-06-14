@@ -12,18 +12,19 @@
 			deferredPrompt = null;
 			// Act on the user's choice
 			if (outcome === 'accepted') {
+				installed = true;
 				console.log('😀 User accepted the install prompt.', true);
 			} else if (outcome === 'dismissed') {
+				installed = false;
 				console.log('😟 User dismissed the install prompt');
 			}
 			// We hide the install button
-			installed = true;
+			installed = false;
 		}
 	}
-	$: console.log('🆗 Installation Dialog opened', deferredPrompt);
 </script>
 
-{#if !installed}
+{#if installed}
 	<div>
 		<button on:click={installApp}> Install </button>
 	</div>

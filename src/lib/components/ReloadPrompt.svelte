@@ -61,4 +61,10 @@
 		border-radius: 2px;
 		padding: 3px 10px;
 	}
+
+	@media (max-width: 480px) {
+		.pwa-toast {
+			bottom: 5rem;
+		}
+	}
 </style>

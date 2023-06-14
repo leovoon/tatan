@@ -13,7 +13,7 @@
 	let search: string = '';
 	let keywordDiv: HTMLDivElement;
 	let maxKeywords: number = 3;
-	let ReloadPrompt = null;
+	let ReloadPrompt: typeof import('$lib/components/ReloadPrompt.svelte')['default'] | null = null;
 
 	const checkLenAndIsChinese = (input: string) => {
 		const chineseRegex = /^[\u4e00-\u9fa5]+$/;
@@ -115,6 +115,9 @@
 		</a>
 		<small>leovoon</small>
 	</footer>
+	{#if ReloadPrompt}
+		<svelte:component this={ReloadPrompt} />
+	{/if}
 </div>
 
 <style>

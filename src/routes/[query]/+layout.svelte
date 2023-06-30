@@ -17,7 +17,7 @@
 	<h1>🔍 搜寻结果</h1>
 
 	{#if $toast}
-		<span transition:fly={{ y: 30, duration: 600 }}>准备分享中 🔄</span>
+		<span transition:fly|global={{ y: 30, duration: 600 }}>准备分享中 🔄</span>
 	{/if}
 </header>
 

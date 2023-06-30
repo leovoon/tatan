@@ -33,7 +33,7 @@
 			{#if singleDeleteMode}
 				<div
 					style="display:inline-block"
-					transition:fly|local={{ x: -10, duration: 300, easing: linear }}
+					transition:fly={{ x: -10, duration: 300, easing: linear }}
 				>
 					已开启
 				</div>

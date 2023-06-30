@@ -1,20 +1,20 @@
 <script lang="ts">
 	import { savedKeywords } from '$lib/store';
 	import { base } from '$app/paths';
-
+	import { i } from '@inlang/sdk-js';
 	$: hasKeywords = $savedKeywords.length > 0;
 
 	const handleDelete = () => {
 		if (hasKeywords) {
-			confirm('确定清楚历史吗?') && savedKeywords.set([]);
+			confirm(i('clear-history-confirm')) && savedKeywords.set([]);
 		}
 		return;
 	};
 </script>
 
 <header>
-	<h2>搜索历史 History</h2>
-	<button on:click={handleDelete}>清楚</button>
+	<h2>{i('history-title')}</h2>
+	<button on:click={handleDelete}>{i('history-clear-all')}</button>
 </header>
 {#if hasKeywords}
 	<div>
@@ -23,7 +23,7 @@
 		{/each}
 	</div>
 {:else}
-	<p>空空如也，暂无历史</p>
+	<p>{i('no-history-text')}</p>
 {/if}
 
 <style>

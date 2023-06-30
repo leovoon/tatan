@@ -1,9 +1,14 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import type { UserConfig } from 'vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
+import inlangPlugin from '@inlang/sdk-js/adapter-sveltekit';
 
 const config: UserConfig = {
+	server: {
+		port: 3000
+	},
 	plugins: [
+		inlangPlugin(),
 		sveltekit(),
 		SvelteKitPWA({
 			srcDir: 'src',

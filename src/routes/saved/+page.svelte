@@ -3,11 +3,11 @@
 	import { savedGifs } from '$lib/store';
 	import { fly } from 'svelte/transition';
 	import { linear } from 'svelte/easing';
-
+	import { i } from '@inlang/sdk-js';
 	let singleDeleteMode = false;
 
 	const handleDeleteAll = () => {
-		confirm('确定要删除所有吗？') && savedGifs.set([]);
+		confirm(i('delete-all-confirm')) && savedGifs.set([]);
 	};
 
 	const handleSingleSelect = (event: { detail: { url: string } }) => {
@@ -21,21 +21,21 @@
 	};
 </script>
 
-<h1>⭐️ 库存</h1>
+<h1>⭐️ {i('storage-title')}</h1>
 
 {#if !$savedGifs.length}
-	<p>没有东东，去点 ❤️ 保存至此。</p>
+	<p>{i('storage-desc')}</p>
 {:else}
 	<div class="control">
-		<button on:click={handleDeleteAll}>删除所有</button>
+		<button on:click={handleDeleteAll}>{i('delete-all-text')}</button>
 		<button class="single" on:click={() => (singleDeleteMode = !singleDeleteMode)}
-			>逐个修改
+			>{i('delete-single-text')}
 			{#if singleDeleteMode}
 				<div
 					style="display:inline-block"
 					transition:fly={{ x: -10, duration: 300, easing: linear }}
 				>
-					已开启
+					{i('edit-mode')}
 				</div>
 			{/if}
 		</button>

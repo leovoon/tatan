@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { i } from '@inlang/sdk-js';
 	export let deferredPrompt: any;
 
 	async function installApp() {
@@ -21,7 +22,7 @@
 </script>
 
 <div>
-	<button on:click={installApp}> Install </button>
+	<button on:click={installApp}> {i('install')}</button>
 </div>
 
 <style>

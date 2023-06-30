@@ -9,6 +9,10 @@
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { onMount } from 'svelte';
 	import InstallPrompt from '$lib/components/InstallPrompt.svelte';
+	import Head from './Head.svelte';
+	import { i, language } from '@inlang/sdk-js';
+	import { browser } from '$app/environment';
+	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
 
 	export let data;
 	let search: string = '';
@@ -22,12 +26,12 @@
 	const checkLenAndIsChinese = (input: string) => {
 		const chineseRegex = /^[\u4e00-\u9fa5]+$/;
 		const chinese = z.string().refine((val) => chineseRegex.test(val), {
-			message: '输入关键字只能是中文，不能加载除中文以外的文字符号 ❌',
+			message: i('only-chinese'),
 			path: ['search']
 		});
 
 		if (input.length === 0) {
-			alert('生命不留空白 ❌');
+			alert(i('no-empty'));
 			return false;
 		}
 
@@ -44,9 +48,11 @@
 
 	const handleQuery = (e: Event) => {
 		e.preventDefault();
-		const valid = checkLenAndIsChinese(search);
-		if (!valid || search === $page.params.query) return;
-		goto(`/${search}`, { replaceState: true });
+		if (language === 'zh') {
+			const valid = checkLenAndIsChinese(search);
+			if (!valid || search === $page.params.query) return;
+		}
+		goto(`/${search}&lang=${language}`);
 		addKeyword(search);
 	};
 
@@ -102,16 +108,14 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Tatan 世界</title>
-	{@html webManifestLink}
-</svelte:head>
+<Head title={i('title')} {webManifestLink} />
 
 <div class="container">
 	<nav>
 		{#if pwaInstallable && !pwaInstalled}
 			<InstallPrompt {deferredPrompt} />
 		{/if}
+
 		{#if hasKeywords}
 			<div class="searchKeywords" bind:this={keywordDiv}>
 				{#each $savedKeywords.slice(0, maxKeywords) as keyword}
@@ -128,7 +132,7 @@
 			<a class="saved" data-sveltekit-preload-code="eager" href="/saved">⭐️</a>
 
 			<div class="inputWrapper">
-				<input type="text" maxlength="5" placeholder="Search tatan.." bind:value={search} />
+				<input type="text" maxlength="5" placeholder={i('search')} bind:value={search} />
 			</div>
 			<button type="submit">🔍</button>
 		</form>
@@ -139,11 +143,12 @@
 	</main>
 
 	<footer>
-		<small>tatan world v{data.npm_package_version}</small>
+		<small>{i('version')}{data.npm_package_version}</small>
 		<a href="https://github.com/leovoon/tatan">
 			<img width={15} height={15} src={githubIcon} alt="source" />
 		</a>
 		<small>leovoon</small>
+		<LanguageSwitcher />
 	</footer>
 </div>
 

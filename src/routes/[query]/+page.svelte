@@ -3,6 +3,7 @@
 	import Info from '$lib/components/Info.svelte';
 	import GifSkeleton from '$lib/components/GifSkeleton.svelte';
 	import { onMount } from 'svelte';
+	import { i } from '@inlang/sdk-js';
 
 	export let data;
 
@@ -21,17 +22,21 @@
 	</div>
 {:then { items, error }}
 	<div class="gifsContainer">
-		{#each items as { link }, key}
-			<Gif gifImg={link} id={key} likeButton={LikeButton} />
+		{#if items}
+			{#each items as { link }, key}
+				<Gif gifImg={link} id={key} likable />
+			{:else}
+				<Info>{i('no-result')}😊</Info>
+			{/each}
 		{:else}
-			<Info>没找到,尝试不一样的关键字😊</Info>
-		{/each}
+			<Info>{i('not-found')}😊</Info>
+		{/if}
 	</div>
 	{#if error}
-		<Info>没找到 - {error.message}</Info>
+		<Info>{i('not-found')} - {error.message}</Info>
 	{/if}
 {:catch error}
-	<Info>出错了 - {error.message}</Info>
+	<Info>{i('something-went-wrong')} - {error.message}</Info>
 {/await}
 
 <style global>

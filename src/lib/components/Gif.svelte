@@ -1,52 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { createEventDispatcher, onMount, type ComponentType } from 'svelte';
 	import imageFailedSVG from '$lib/assets/imageFailed.svg';
 	import { savedGifs } from '$lib/store';
-	import { base } from '$app/paths';
-	import { toast } from '$lib/store';
+	import LikeButton from './LikeButton.svelte';
 
 	export let gifImg: string;
 	export let id: number;
-	export let likeButton: any;
-
-	let controller: AbortController;
-
-	const dispatch = createEventDispatcher();
-
-	const getFileFromUrl = async (url: string, defaultFileFormat = 'image/gif') => {
-		controller = new AbortController();
-		try {
-			$toast = true;
-			const response = await fetch(`${base}/api/get-image?url=${url}`, {
-				signal: controller.signal
-			});
-			const data = await response.blob();
-			if (!data) return;
-			return new File([data], url, {
-				type: response.headers.get('content-type') || defaultFileFormat
-			});
-		} catch (error) {
-			if (error === 'AbortError') return;
-			throw error;
-		} finally {
-			$toast = false;
-		}
-	};
-
-	const handleClick = async () => {
-		if (controller) controller.abort();
-		const file = await getFileFromUrl(gifImg);
-		if (!file) return;
-		const shareData = {
-			files: [file],
-			title: '',
-			text: ''
-		};
-		if (!navigator.canShare(shareData)) alert('Your browser does not support.');
-		await navigator.share(shareData);
-		dispatch('gifSelected', { url: gifImg });
-	};
+	export let likable = false;
 
 	const handleImageLoadFailed = (e: Event) => {
 		const target = e.target as HTMLImageElement;
@@ -67,11 +27,11 @@
 	$: isSaved = localStorageGifs.includes(gifImg) || false;
 </script>
 
-<div class="gif" on:click={handleClick} on:keydown={handleClick}>
-	{#if likeButton}
+<div class="gif" role="button" tabindex="-1">
+	{#if likable}
 		<button on:click|stopPropagation>
 			<svelte:component
-				this={likeButton}
+				this={LikeButton}
 				liked={isSaved}
 				id={'like-' + id}
 				on:change={handleSaveTatan}

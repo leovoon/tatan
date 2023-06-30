@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { onMount, type ComponentType } from 'svelte';
 	import { page } from '$app/stores';
-	import { toast } from '$lib/store';
-	import { fly } from 'svelte/transition';
+	import { i } from '@inlang/sdk-js';
 
 	let pagination: ComponentType;
 
@@ -14,11 +13,7 @@
 </script>
 
 <header>
-	<h1>🔍 搜寻结果</h1>
-
-	{#if $toast}
-		<span transition:fly|global={{ y: 30, duration: 600 }}>准备分享中 🔄</span>
-	{/if}
+	<h1>🔍 {i('search-title')}</h1>
 </header>
 
 <slot />
@@ -32,10 +27,5 @@
 	}
 	h1 {
 		font-size: large;
-	}
-
-	span {
-		display: inline-block;
-		color: darkgrey;
 	}
 </style>

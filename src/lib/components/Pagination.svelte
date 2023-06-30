@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { goto, invalidateAll } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { page, navigating } from '$app/stores';
+	import { i } from '@inlang/sdk-js';
 
 	export let totalResults: number;
 	let showPrevious = false;
@@ -37,11 +38,11 @@
 
 <div class="buttonGroup">
 	<button disabled={!showPrevious || isNavigating} on:click={handlePrevious}>
-		<span>上一页</span>
+		<span>{i('previous-page')}</span>
 	</button>
 	<button disabled={!showNext || isNavigating} on:click={handleNext}>
-		<span style:display={isNavigating ? 'block' : 'none'}> 加载中... </span>
-		<span style:display={isNavigating ? 'none' : 'block'}>下一页</span>
+		<span style:display={isNavigating ? 'block' : 'none'}> {i('loading-text')} </span>
+		<span style:display={isNavigating ? 'none' : 'block'}>{i('next-page')}</span>
 	</button>
 </div>
 

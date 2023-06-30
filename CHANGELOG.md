@@ -1,5 +1,12 @@
 
 
+## [0.8.0](https://github.com/leovoon/tatan/compare/0.7.3...0.8.0) (2023-06-30)
+
+
+### Features
+
+* Added i81n ([d4722e8](https://github.com/leovoon/tatan/commit/d4722e8a77475eb30261aaf5038e1aaf0a785626))
+
 ### [0.7.3](https://github.com/leovoon/tatan/compare/0.7.2...0.7.3) (2023-04-22)
 
 ### [0.7.2](https://github.com/leovoon/tatan/compare/0.7.1...0.7.2) (2023-02-22)

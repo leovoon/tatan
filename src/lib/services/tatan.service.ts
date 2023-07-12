@@ -13,8 +13,7 @@ export const getTatan = async (
 	let langParam;
 
 	if (lang === 'zh') langParam = `q=tatan${query}&gl=cn&hl=zh-CN&lr=lang_zh-TW|lang_zh-CN`;
-	if (lang === 'en')
-		langParam = `q=${encodeURIComponent('tatan comel ')}${query}&gl=id&hl=en&lr=lang_ms|lang_id`;
+	if (lang === 'en') langParam = `q=tatan${query}&gl=id&lr=lang_ms|lang_id`;
 
 	const response = await fetch(
 		`https://customsearch.googleapis.com/customsearch/v1?fields=queries/request(totalResults),items(link,displayLink,image)&key=${API_PRIVATE_KEY}&cx=${SEARCH_ENGINE_ID}&${langParam}&c2coff=0&fileType=gif&searchType=image&imgType=animated&alt=json&safe=active&filter=1&start=${page}`,

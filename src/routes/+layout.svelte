@@ -132,7 +132,7 @@
 			<a class="saved" data-sveltekit-preload-code="eager" href="/saved">⭐️</a>
 
 			<div class="inputWrapper">
-				<input type="text" maxlength="5" placeholder={i('search')} bind:value={search} />
+				<input type="text" maxlength="12" placeholder={i('search')} bind:value={search} />
 			</div>
 			<button type="submit">🔍</button>
 		</form>

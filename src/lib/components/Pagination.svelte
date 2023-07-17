@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import { goto, preloadData } from '$app/navigation';
 	import { page, navigating } from '$app/stores';
 	import { i } from '@inlang/sdk-js';
 
@@ -28,6 +28,7 @@
 	const handleNext = () => {
 		pageNum += 10;
 		goto(`/${query}?page=${pageNum}`, { noScroll: true });
+		preloadData(`/${query}?page=${pageNum + 10}`)
 	};
 
 	const handlePrevious = () => {

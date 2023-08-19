@@ -1,5 +1,19 @@
 
 
+## [0.9.0](https://github.com/leovoon/tatan/compare/0.8.0...0.9.0) (2023-08-19)
+
+
+### Features
+
+* Preload next page ([354083c](https://github.com/leovoon/tatan/commit/354083cda1ed922924442df6f896ee257f791a49))
+
+
+### Bug Fixes
+
+* exclude img failed to load ([6f9e3e1](https://github.com/leovoon/tatan/commit/6f9e3e126c6654ab5d895d1bd78600ba4df09a8e))
+* Home page white space ([e83b750](https://github.com/leovoon/tatan/commit/e83b75000b0853ae383a63ee6d5bcdbb29c853c1))
+* max length and search result ([cb306b5](https://github.com/leovoon/tatan/commit/cb306b5ccb48efd72674f7bbe7fb279d702a188f))
+
 ## [0.8.0](https://github.com/leovoon/tatan/compare/0.7.3...0.8.0) (2023-06-30)
 
 

@@ -7,10 +7,8 @@
 	export let gifImg: string;
 	export let id: number;
 	export let likable = false;
-	let imageFailedToLoad = false;
 
 	const handleImageLoadFailed = (e: Event) => {
-		imageFailedToLoad = true;
 		const target = e.target as HTMLImageElement;
 		target.src = imageFailedSVG;
 		target.onerror = null;
@@ -29,27 +27,25 @@
 	$: isSaved = localStorageGifs.includes(gifImg) || false;
 </script>
 
-{#if !imageFailedToLoad}
-	<div class="gif" role="button" tabindex="-1">
-		{#if likable}
-			<button on:click|stopPropagation>
-				<svelte:component
-					this={LikeButton}
-					liked={isSaved}
-					id={'like-' + id}
-					on:change={handleSaveTatan}
-				/>
-			</button>
-		{/if}
-		<img
-			src={gifImg}
-			on:error={handleImageLoadFailed}
-			alt={query}
-			loading="lazy"
-			referrerpolicy="no-referrer"
-		/>
-	</div>
-{/if}
+<div class="gif" role="button" tabindex="-1">
+	{#if likable}
+		<button on:click|stopPropagation>
+			<svelte:component
+				this={LikeButton}
+				liked={isSaved}
+				id={'like-' + id}
+				on:change={handleSaveTatan}
+			/>
+		</button>
+	{/if}
+	<img
+		src={gifImg}
+		on:error={handleImageLoadFailed}
+		alt={query}
+		loading="lazy"
+		referrerpolicy="no-referrer"
+	/>
+</div>
 
 <style>
 	.gif {

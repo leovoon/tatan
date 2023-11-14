@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { i } from '@inlang/sdk-js';
+	import * as m from '../../paraglide/messages';
 	export let deferredPrompt: any;
 
 	async function installApp() {
@@ -22,7 +22,7 @@
 </script>
 
 <div>
-	<button on:click={installApp}> {i('install')}</button>
+	<button on:click={installApp}> {m.install()}</button>
 </div>
 
 <style>

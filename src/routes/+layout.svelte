@@ -7,12 +7,12 @@
 	import SearchKeyword from '$lib/components/SearchKeyword.svelte';
 	import { savedKeywords } from '$lib/store';
 	import { pwaInfo } from 'virtual:pwa-info';
-	import { onMount } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import InstallPrompt from '$lib/components/InstallPrompt.svelte';
 	import Head from './Head.svelte';
-	import { i, language } from '@inlang/sdk-js';
-	import { browser } from '$app/environment';
+	import * as m from '../paraglide/messages';
 	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
+	import ParaglideJsSvelteKitCSR from '$lib/components/ParaglideJsSvelteKitCSR.svelte';
 
 	export let data;
 	let search: string = '';
@@ -26,12 +26,12 @@
 	const checkLenAndIsChinese = (input: string) => {
 		const chineseRegex = /^[\u4e00-\u9fa5]+$/;
 		const chinese = z.string().refine((val) => chineseRegex.test(val), {
-			message: i('only-chinese'),
+			message: m.only_chinese(),
 			path: ['search']
 		});
 
 		if (input.length === 0) {
-			alert(i('no-empty'));
+			alert(m.no_empty());
 			return false;
 		}
 
@@ -45,14 +45,15 @@
 		}
 		return true;
 	};
+	const languageTag = getContext('languageTag');
 
 	const handleQuery = (e: Event) => {
 		e.preventDefault();
-		if (language === 'zh') {
+		if (languageTag === 'zh') {
 			const valid = checkLenAndIsChinese(search);
 			if (!valid || search === $page.params.query) return;
 		}
-		goto(`/${search}&lang=${language}`);
+		goto(`/${search}&lang=${languageTag}`);
 		addKeyword(search);
 	};
 
@@ -108,49 +109,51 @@
 	});
 </script>
 
-<Head title={i('title')} {webManifestLink} />
+<Head title={m.title()} {webManifestLink} />
 
-<div class="container">
-	<nav>
-		{#if pwaInstallable && !pwaInstalled}
-			<InstallPrompt {deferredPrompt} />
-		{/if}
+<ParaglideJsSvelteKitCSR>
+	<div class="container">
+		<nav>
+			{#if pwaInstallable && !pwaInstalled}
+				<InstallPrompt {deferredPrompt} />
+			{/if}
 
-		{#if hasKeywords}
-			<div class="searchKeywords" bind:this={keywordDiv}>
-				{#each $savedKeywords.slice(0, maxKeywords) as keyword}
-					<SearchKeyword {keyword} />
-				{/each}
+			{#if hasKeywords}
+				<div class="searchKeywords" bind:this={keywordDiv}>
+					{#each $savedKeywords.slice(0, maxKeywords) as keyword}
+						<SearchKeyword {keyword} />
+					{/each}
 
-				{#if $savedKeywords.length > maxKeywords}
-					<SearchKeyword keyword="..." />
-				{/if}
-			</div>
-		{/if}
+					{#if $savedKeywords.length > maxKeywords}
+						<SearchKeyword keyword="..." />
+					{/if}
+				</div>
+			{/if}
 
-		<form action={search} on:submit={handleQuery} class="searchBar">
-			<a class="saved" data-sveltekit-preload-code="eager" href="/saved">⭐️</a>
+			<form action={search} on:submit={handleQuery} class="searchBar">
+				<a class="saved" data-sveltekit-preload-code="eager" href="/saved">⭐️</a>
 
-			<div class="inputWrapper">
-				<input type="text" maxlength="12" placeholder={i('search')} bind:value={search} />
-			</div>
-			<button type="submit">🔍</button>
-		</form>
-	</nav>
+				<div class="inputWrapper">
+					<input type="text" maxlength="12" placeholder={m.search()} bind:value={search} />
+				</div>
+				<button type="submit">🔍</button>
+			</form>
+		</nav>
 
-	<main>
-		<slot />
-	</main>
+		<main>
+			<slot />
+		</main>
 
-	<footer>
-		<small>{i('version')}{data.npm_package_version}</small>
-		<a href="https://github.com/leovoon/tatan">
-			<img width={15} height={15} src={githubIcon} alt="source" />
-		</a>
-		<small>leovoon</small>
-		<LanguageSwitcher />
-	</footer>
-</div>
+		<footer>
+			<small>{m.version()}{data.npm_package_version}</small>
+			<a href="https://github.com/leovoon/tatan">
+				<img width={15} height={15} src={githubIcon} alt="source" />
+			</a>
+			<small>leovoon</small>
+			<LanguageSwitcher />
+		</footer>
+	</div>
+</ParaglideJsSvelteKitCSR>
 
 {#if ReloadPrompt}
 	<svelte:component this={ReloadPrompt} />

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, type ComponentType } from 'svelte';
 	import { page } from '$app/stores';
-	import { i } from '@inlang/sdk-js';
+	import * as m from '../../paraglide/messages';
 
 	let pagination: ComponentType;
 
@@ -13,7 +13,7 @@
 </script>
 
 <header>
-	<h1>🔍 {i('search-title')}</h1>
+	<h1>🔍 {m.search_title()}</h1>
 </header>
 <slot />
 

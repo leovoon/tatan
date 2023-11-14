@@ -6,3 +6,5 @@ export const savedGifs: Writable<string[]> = persisted('savedGifs', []);
 export const savedKeywords: Writable<string[]> = persisted('savedKeywords', []);
 
 export const toast: Writable<boolean> = persisted('toast', false);
+
+export const language: Writable<string> = persisted('language', 'en');

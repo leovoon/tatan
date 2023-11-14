@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto, preloadData } from '$app/navigation';
 	import { page, navigating } from '$app/stores';
-	import { i } from '@inlang/sdk-js';
+	import * as m from '../../paraglide/messages';
 
 	export let totalResults: number;
 	let showPrevious = false;
@@ -28,7 +28,7 @@
 	const handleNext = () => {
 		pageNum += 10;
 		goto(`/${query}?page=${pageNum}`, { noScroll: true });
-		preloadData(`/${query}?page=${pageNum + 10}`)
+		preloadData(`/${query}?page=${pageNum + 10}`);
 	};
 
 	const handlePrevious = () => {
@@ -39,11 +39,11 @@
 
 <div class="buttonGroup">
 	<button disabled={!showPrevious || isNavigating} on:click={handlePrevious}>
-		<span>{i('previous-page')}</span>
+		<span>{m.previous_page()}</span>
 	</button>
 	<button disabled={!showNext || isNavigating} on:click={handleNext}>
-		<span style:display={isNavigating ? 'block' : 'none'}> {i('loading-text')} </span>
-		<span style:display={isNavigating ? 'none' : 'block'}>{i('next-page')}</span>
+		<span style:display={isNavigating ? 'block' : 'none'}> {m.loading_text()} </span>
+		<span style:display={isNavigating ? 'none' : 'block'}>{m.next_page()}</span>
 	</button>
 </div>
 

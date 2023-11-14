@@ -1,20 +1,20 @@
 <script lang="ts">
 	import { savedKeywords } from '$lib/store';
 	import { base } from '$app/paths';
-	import { i } from '@inlang/sdk-js';
+	import * as m from '../../paraglide/messages';
 	$: hasKeywords = $savedKeywords.length > 0;
 
 	const handleDelete = () => {
 		if (hasKeywords) {
-			confirm(i('clear-history-confirm')) && savedKeywords.set([]);
+			confirm(m.clear_history_confirm()) && savedKeywords.set([]);
 		}
 		return;
 	};
 </script>
 
 <header>
-	<h2>{i('history-title')}</h2>
-	<button on:click={handleDelete}>{i('history-clear-all')}</button>
+	<h2>{m.history_title()}</h2>
+	<button on:click={handleDelete}>{m.history_clear_all()}</button>
 </header>
 {#if hasKeywords}
 	<div>
@@ -23,7 +23,7 @@
 		{/each}
 	</div>
 {:else}
-	<p>{i('no-history-text')}</p>
+	<p>{m.no_history_text()}</p>
 {/if}
 
 <style>

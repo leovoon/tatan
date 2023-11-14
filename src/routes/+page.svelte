@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Info from '$lib/components/Info.svelte';
-	import { i } from '@inlang/sdk-js';
+	import * as m from '../paraglide/messages';
 </script>
 
-<h1>{i('title')}</h1>
-<Info>{i('description')}</Info>
+<h1>{m.title()}</h1>
+<Info>{m.description()}</Info>

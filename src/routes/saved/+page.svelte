@@ -3,11 +3,11 @@
 	import { savedGifs } from '$lib/store';
 	import { fly } from 'svelte/transition';
 	import { linear } from 'svelte/easing';
-	import { i } from '@inlang/sdk-js';
+	import * as m from '../../paraglide/messages';
 	let singleDeleteMode = false;
 
 	const handleDeleteAll = () => {
-		confirm(i('delete-all-confirm')) && savedGifs.set([]);
+		confirm(`${m.delete_all_confirm()}`) && savedGifs.set([]);
 	};
 
 	const handleSingleSelect = (event: { detail: { url: string } }) => {
@@ -21,21 +21,21 @@
 	};
 </script>
 
-<h1>⭐️ {i('storage-title')}</h1>
+<h1>⭐️ {m.storage_title()}</h1>
 
 {#if !$savedGifs.length}
-	<p>{i('storage-desc')}</p>
+	<p>{m.storage_desc()}</p>
 {:else}
 	<div class="control">
-		<button on:click={handleDeleteAll}>{i('delete-all-text')}</button>
+		<button on:click={handleDeleteAll}>{m.delete_all_text()}</button>
 		<button class="single" on:click={() => (singleDeleteMode = !singleDeleteMode)}
-			>{i('delete-single-text')}
+			>{m.delete_single_text()}
 			{#if singleDeleteMode}
 				<div
 					style="display:inline-block"
 					transition:fly={{ x: -10, duration: 300, easing: linear }}
 				>
-					{i('edit-mode')}
+					{m.edit_mode()}
 				</div>
 			{/if}
 		</button>

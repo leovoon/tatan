@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { useRegisterSW } from 'virtual:pwa-register/svelte';
+	import * as m from '../../paraglide/messages';
 	const { needRefresh, updateServiceWorker, offlineReady } = useRegisterSW({
 		onRegistered(r) {
 			// uncomment following code if you want check for updates
@@ -26,9 +27,9 @@
 	<div class="pwa-toast" role="alert">
 		<div class="message">
 			{#if $offlineReady}
-				<span> 已可线下使用 <br /> App ready to work offline</span>
+				<span>{m.offline_ready()}<br /> </span>
 			{:else}
-				<span> 有新的更新，点刷新 <br /> New Update. Click on reload button to update. </span>
+				<span> <br /> {m.new_update()} </span>
 			{/if}
 		</div>
 		{#if $needRefresh}

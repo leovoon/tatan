@@ -1,26 +1,12 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { languages, switchLanguage } from '@inlang/sdk-js';
-
-	let currentLang: string;
-
-	if (browser) {
-		currentLang = localStorage.getItem('language') ?? languages[0];
-	}
-
-	async function switchToLang(lang: string) {
-		await switchLanguage(lang);
-		if (browser) {
-			currentLang = localStorage.getItem('language') ?? languages[0];
-		}
-	}
+	import { setLanguageTag, languageTag } from '../../paraglide/runtime';
 </script>
 
 <ul>
-	{#if currentLang === 'en'}
-		<button on:click={() => switchToLang('zh')}> 中文 </button>
+	{#if languageTag() === 'en'}
+		<button on:click={() => setLanguageTag('zh')}> 中文 </button>
 	{:else}
-		<button on:click={() => switchToLang('en')}> English </button>
+		<button on:click={() => setLanguageTag('en')}> English </button>
 	{/if}
 </ul>
 

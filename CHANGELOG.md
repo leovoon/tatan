@@ -1,5 +1,12 @@
 
 
+### [0.9.1](https://github.com/leovoon/tatan/compare/0.9.0...0.9.1) (2023-11-14)
+
+
+### Styles
+
+* add page transition ([938c69e](https://github.com/leovoon/tatan/commit/938c69e6b41ef1796c3a94d4cc4dc0769b20dea8))
+
 ## [0.9.0](https://github.com/leovoon/tatan/compare/0.8.0...0.9.0) (2023-08-19)
 
 

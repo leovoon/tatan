@@ -46,10 +46,10 @@
 		}
 		return true;
 	};
+	const lang = languageTag();
 
 	const handleQuery = (e: Event) => {
 		e.preventDefault();
-		const lang = languageTag();
 		if (lang === 'zh') {
 			const valid = checkLenAndIsChinese(search);
 			if (!valid || search === $page.params.query) return;

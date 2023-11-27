@@ -3,7 +3,7 @@
 	import Info from '$lib/components/Info.svelte';
 	import GifSkeleton from '$lib/components/GifSkeleton.svelte';
 	import { onMount } from 'svelte';
-	import * as m from '../../paraglide/messages';
+	import * as m from '$lib/paraglide/messages';
 
 	export let data;
 
@@ -21,17 +21,15 @@
 		{/each}
 	</div>
 {:then { items, error }}
-	<div class="gifsContainer">
-		{#if items}
+	{#if items}
+		<div class="gifsContainer">
 			{#each items as { link }, key}
 				<Gif gifImg={link} id={key} likable />
-			{:else}
-				<Info>{m.no_result()}😊</Info>
 			{/each}
-		{:else}
-			<Info>{m.not_found()}😊</Info>
-		{/if}
-	</div>
+		</div>
+	{:else}
+		<Info>{m.not_found()}😊</Info>
+	{/if}
 	{#if error}
 		<Info>{m.not_found()} - {error.message}</Info>
 	{/if}

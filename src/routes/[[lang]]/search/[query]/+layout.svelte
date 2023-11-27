@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, type ComponentType } from 'svelte';
 	import { page } from '$app/stores';
-	import * as m from '../../paraglide/messages';
+	import * as m from '$lib/paraglide/messages';
 
 	let pagination: ComponentType;
 

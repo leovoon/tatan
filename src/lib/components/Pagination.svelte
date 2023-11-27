@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { goto, preloadData } from '$app/navigation';
 	import { page, navigating } from '$app/stores';
-	import * as m from '../../paraglide/messages';
+	import * as m from '$lib/paraglide/messages';
+	import { redirectHref } from '$lib/utils';
 
 	export let totalResults: number;
 	let showPrevious = false;
@@ -27,13 +28,13 @@
 
 	const handleNext = () => {
 		pageNum += 10;
-		goto(`/${query}?page=${pageNum}`, { noScroll: true });
-		preloadData(`/${query}?page=${pageNum + 10}`);
+		goto(redirectHref(`/search/${query}?page=${pageNum}`), { noScroll: true });
+		preloadData(redirectHref(`/search/${query}?page=${pageNum + 10}`));
 	};
 
 	const handlePrevious = () => {
 		pageNum -= 10;
-		goto(`/${query}?page=${pageNum}`, { noScroll: true });
+		goto(redirectHref(`/search/${query}?page=${pageNum}`), { noScroll: true });
 	};
 </script>
 

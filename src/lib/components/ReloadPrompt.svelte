@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { useRegisterSW } from 'virtual:pwa-register/svelte';
-	import * as m from '../../paraglide/messages';
+	import * as m from '$lib/paraglide/messages';
 	const { needRefresh, updateServiceWorker, offlineReady } = useRegisterSW({
 		onRegistered(r) {
 			// uncomment following code if you want check for updates
@@ -29,7 +29,7 @@
 			{#if $offlineReady}
 				<span>{m.offline_ready()}<br /> </span>
 			{:else}
-				<span> <br /> {m.new_update()} </span>
+				<span> <br /> {m.newupdate()} </span>
 			{/if}
 		</div>
 		{#if $needRefresh}

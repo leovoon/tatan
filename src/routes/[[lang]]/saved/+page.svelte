@@ -3,7 +3,8 @@
 	import { savedGifs } from '$lib/store';
 	import { fly } from 'svelte/transition';
 	import { linear } from 'svelte/easing';
-	import * as m from '../../paraglide/messages';
+	import * as m from '$lib/paraglide/messages';
+
 	let singleDeleteMode = false;
 
 	const handleDeleteAll = () => {

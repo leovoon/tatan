@@ -2,22 +2,24 @@
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
+	import { redirectHref } from '$lib/utils';
 
 	export let keyword = '';
 
 	const handleKeyword = () => {
 		if (keyword === '...') {
-			goto('/searchHistory');
+			goto(redirectHref('/searchHistory'));
 			return;
 		}
-		goto(`${base}${keyword}`, { replaceState: true });
+		goto(redirectHref(`/search/${keyword}`), { replaceState: true });
 	};
 
 	$: active = $page.params.query === keyword;
 </script>
 
 {#if keyword}
-	<span role="button" tabindex="0" class:active on:keyup={handleKeyword} on:click={handleKeyword}>{keyword}</span
+	<span role="button" tabindex="0" class:active on:keyup={handleKeyword} on:click={handleKeyword}
+		>{keyword}</span
 	>
 {/if}
 

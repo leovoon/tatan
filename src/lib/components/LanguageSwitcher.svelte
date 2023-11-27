@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { setLanguageTag, languageTag } from '../../paraglide/runtime';
+	import { setLanguageTag, languageTag } from '$lib/paraglide/runtime';
 </script>
 
 <ul>

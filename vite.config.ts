@@ -1,13 +1,17 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import type { UserConfig } from 'vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
-
+import { paraglide } from '@inlang/paraglide-js-adapter-vite';
 const config: UserConfig = {
 	server: {
 		port: 3000
 	},
 	plugins: [
 		sveltekit(),
+		paraglide({
+			project: './project.inlang.json',
+			outdir: './src/lib/paraglide'
+		}),
 		SvelteKitPWA({
 			srcDir: 'src',
 			mode: 'development',
@@ -60,7 +64,7 @@ const config: UserConfig = {
 	},
 	ssr: {
 		noExternal: ['@inlang/paraglide-js']
-	},
+	}
 };
 
 export default config;

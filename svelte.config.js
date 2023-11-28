@@ -13,6 +13,9 @@ const config = {
 		}),
 		serviceWorker: {
 			register: false
+		},
+		alias: {
+			$paraglide: './src/paraglide'
 		}
 	}
 };

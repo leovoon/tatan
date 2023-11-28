@@ -1,17 +1,15 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { base } from '$app/paths';
 	import { page } from '$app/stores';
-	import { redirectHref } from '$lib/utils';
 
 	export let keyword = '';
 
 	const handleKeyword = () => {
 		if (keyword === '...') {
-			goto(redirectHref('/searchHistory'));
+			goto('/searchHistory');
 			return;
 		}
-		goto(redirectHref(`/search/${keyword}`), { replaceState: true });
+		goto(`/search/${keyword}`, { replaceState: true });
 	};
 
 	$: active = $page.params.query === keyword;

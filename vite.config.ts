@@ -10,7 +10,7 @@ const config: UserConfig = {
 		sveltekit(),
 		paraglide({
 			project: './project.inlang.json',
-			outdir: './src/lib/paraglide'
+			outdir: './src/paraglide'
 		}),
 		SvelteKitPWA({
 			srcDir: 'src',

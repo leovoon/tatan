@@ -5,7 +5,7 @@
 		onSetLanguageTag,
 		sourceLanguageTag,
 		languageTag
-	} from '$lib/paraglide/runtime';
+	} from '$paraglide/runtime';
 	import { getContext, setContext } from 'svelte';
 	import { page } from '$app/stores';
 	import { redirect } from '@sveltejs/kit';
@@ -25,9 +25,7 @@
 				  })()
 			: sourceLanguageTag
 	);
-
 	setLanguageTag(() => getContext('languageTag'));
-
 	// We save the old language tag to check if the language tag has changed
 	let oldLanguageTag = languageTag();
 

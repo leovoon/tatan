@@ -3,7 +3,7 @@
 	import Info from '$lib/components/Info.svelte';
 	import GifSkeleton from '$lib/components/GifSkeleton.svelte';
 	import { onMount } from 'svelte';
-	import * as m from '$lib/paraglide/messages';
+	import * as m from '$paraglide/messages';
 
 	export let data;
 

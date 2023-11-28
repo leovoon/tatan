@@ -10,10 +10,10 @@
 	import { onMount } from 'svelte';
 	import InstallPrompt from '$lib/components/InstallPrompt.svelte';
 	import Head from '../../lib/components/Head.svelte';
-	import * as m from '$lib/paraglide/messages';
+	import * as m from '$paraglide/messages';
 	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
-	import { languageTag } from '$lib/paraglide/runtime';
-	import { redirectHref } from '$lib/utils';
+	import { languageTag } from '$paraglide/runtime';
+	import { browser } from '$app/environment';
 
 	export let data;
 	let search: string = '';
@@ -23,6 +23,10 @@
 	let deferredPrompt: any;
 	let pwaInstallable = false;
 	let pwaInstalled = false;
+
+	const redirectHref = (href: string) => {
+		return languageTag() ? `/${languageTag()}${href}` : href;
+	};
 
 	const checkLenAndIsChinese = (input: string) => {
 		const chineseRegex = /^[\u4e00-\u9fa5]+$/;
@@ -54,7 +58,7 @@
 			const valid = checkLenAndIsChinese(search);
 			if (!valid || search === $page.params.query) return;
 		}
-		goto(redirectHref(`/search/${search}&lang=${lang}`));
+		goto(`/search/${search}&lang=${lang}`);
 		addKeyword(search);
 	};
 

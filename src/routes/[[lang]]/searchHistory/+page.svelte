@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { savedKeywords } from '$lib/store';
 	import { base } from '$app/paths';
-	import * as m from '$lib/paraglide/messages';
+	import * as m from '$paraglide/messages';
 	$: hasKeywords = $savedKeywords.length > 0;
 
 	const handleDelete = () => {

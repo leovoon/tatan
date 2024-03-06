@@ -1,5 +1,7 @@
 
 
+### [0.9.2](https://github.com/leovoon/tatan/compare/0.9.1...0.9.2) (2024-03-06)
+
 ### [0.9.1](https://github.com/leovoon/tatan/compare/0.9.0...0.9.1) (2023-11-14)
 
 

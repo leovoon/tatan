@@ -1,15 +1,16 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { i18n } from '$lib/i18n';
 
 	export let keyword = '';
 
 	const handleKeyword = () => {
 		if (keyword === '...') {
-			goto('/searchHistory');
+			goto(i18n.resolveRoute('/searchHistory'));
 			return;
 		}
-		goto(`/search/${keyword}`, { replaceState: true });
+		goto(i18n.resolveRoute(`/search/${keyword}`), { replaceState: true });
 	};
 
 	$: active = $page.params.query === keyword;

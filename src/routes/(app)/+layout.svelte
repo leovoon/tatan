@@ -9,11 +9,11 @@
 	import { pwaInfo } from 'virtual:pwa-info';
 	import { onMount } from 'svelte';
 	import InstallPrompt from '$lib/components/InstallPrompt.svelte';
-	import Head from '../../lib/components/Head.svelte';
+	import Head from '$lib/components/Head.svelte';
 	import * as m from '$paraglide/messages';
 	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
 	import { languageTag } from '$paraglide/runtime';
-	import { browser } from '$app/environment';
+	import { i18n } from '$lib/i18n';
 
 	export let data;
 	let search: string = '';
@@ -23,10 +23,6 @@
 	let deferredPrompt: any;
 	let pwaInstallable = false;
 	let pwaInstalled = false;
-
-	const redirectHref = (href: string) => {
-		return languageTag() ? `/${languageTag()}${href}` : href;
-	};
 
 	const checkLenAndIsChinese = (input: string) => {
 		const chineseRegex = /^[\u4e00-\u9fa5]+$/;
@@ -58,7 +54,8 @@
 			const valid = checkLenAndIsChinese(search);
 			if (!valid || search === $page.params.query) return;
 		}
-		goto(`/search/${search}&lang=${lang}`);
+		goto(i18n.resolveRoute(`/search/${search}`));
+
 		addKeyword(search);
 	};
 
@@ -115,7 +112,6 @@
 </script>
 
 <Head title={m.title()} {webManifestLink} />
-
 <div class="container">
 	<nav>
 		{#if pwaInstallable && !pwaInstalled}
@@ -135,7 +131,7 @@
 		{/if}
 
 		<form action={search} on:submit={handleQuery} class="searchBar">
-			<a class="saved" href={redirectHref('/saved')}>⭐️</a>
+			<a hreflang={languageTag()} href="/saved" class="saved">⭐️</a>
 
 			<div class="inputWrapper">
 				<input type="text" maxlength="12" placeholder={m.search()} bind:value={search} />

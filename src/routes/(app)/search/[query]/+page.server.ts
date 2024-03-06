@@ -3,7 +3,7 @@ export const load = async (event) => {
 	const { params, url, setHeaders } = event;
 	const { query } = params;
 	const urlSearchParam = url.searchParams.get('page');
-	const lang = url.searchParams.get('lang') ?? 'zh';
+	const lang = event.locals.paraglide.lang;
 	const pageNum = urlSearchParam ? +urlSearchParam : 1;
 	const tatan = getTatan(lang, query, pageNum, setHeaders);
 	return {

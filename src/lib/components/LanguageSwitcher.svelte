@@ -1,29 +1,31 @@
 <script lang="ts">
-	import { setLanguageTag, languageTag } from '$paraglide/runtime';
+	import {
+		availableLanguageTags,
+		languageTag,
+		type AvailableLanguageTag
+	} from '$paraglide/runtime';
+	import { i18n } from '$lib/i18n';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
+
+	function switchToLanguage(e: Event) {
+		const newLanguage = (e.target as HTMLSelectElement).value as AvailableLanguageTag;
+		if (!newLanguage) return;
+		const canonicalPath = i18n.route($page.url.pathname);
+		const localisedPath = i18n.resolveRoute(canonicalPath, newLanguage);
+		goto(localisedPath);
+	}
+
+	const labels = {
+		en: 'English',
+		zh: '中文'
+	};
 </script>
 
 <ul>
-	{#if languageTag() === 'en'}
-		<button on:click={() => setLanguageTag('zh')}> 中文 </button>
-	{:else}
-		<button on:click={() => setLanguageTag('en')}> English </button>
-	{/if}
+	<select on:change={switchToLanguage}>
+		{#each availableLanguageTags as langTag}
+			<option value={langTag} selected={languageTag() === langTag}>{labels[langTag]}</option>
+		{/each}
+	</select>
 </ul>
-
-<style>
-	ul {
-		text-align: center;
-		padding-left: 0;
-		margin-block: 0;
-	}
-
-	button {
-		color: white;
-		background: linear-gradient(75deg, #d57373 0%, #f32727 100%);
-		border-radius: 14px;
-		padding: 0.5rem 1rem;
-		border: none;
-		cursor: pointer;
-		font-size: 12px;
-	}
-</style>

@@ -16,7 +16,11 @@ const config = {
 		},
 		alias: {
 			$paraglide: './src/paraglide'
-		}
+		},
+		prerender: {
+			//Needed for correctly prerendering <link rel="alternate" hreflang="x" href="y">
+			origin: "http://localhost:3000",
+		},
 	}
 };
 

@@ -1,7 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import type { UserConfig } from 'vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
-import { paraglide } from '@inlang/paraglide-js-adapter-vite';
+import { paraglide } from "@inlang/paraglide-js-adapter-sveltekit/vite"
 const config: UserConfig = {
 	server: {
 		port: 3000
@@ -9,14 +9,12 @@ const config: UserConfig = {
 	plugins: [
 		sveltekit(),
 		paraglide({
-			project: './project.inlang.json',
+			project: './project.inlang',
 			outdir: './src/paraglide'
 		}),
 		SvelteKitPWA({
-			srcDir: 'src',
+			srcDir: './src',
 			mode: 'development',
-			scope: '/',
-			base: '/',
 			selfDestroying: process.env.SELF_DESTROYING_SW === 'true',
 			manifest: {
 				short_name: 'Tatan Gif',
@@ -59,12 +57,6 @@ const config: UserConfig = {
 			}
 		})
 	],
-	optimizeDeps: {
-		exclude: ['@inlang/paraglide-js']
-	},
-	ssr: {
-		noExternal: ['@inlang/paraglide-js']
-	}
 };
 
 export default config;

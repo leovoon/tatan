@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { savedKeywords } from '$lib/store';
-	import { base } from '$app/paths';
 	import * as m from '$paraglide/messages';
 	$: hasKeywords = $savedKeywords.length > 0;
 
@@ -14,12 +13,14 @@
 
 <header>
 	<h2>{m.history_title()}</h2>
-	<button on:click={handleDelete}>{m.history_clear_all()}</button>
+	{#if hasKeywords}
+		<button on:click={handleDelete}>{m.history_clear_all()}</button>
+	{/if}
 </header>
 {#if hasKeywords}
 	<div>
 		{#each $savedKeywords as keyword}
-			<a href="{base}/{keyword}">{keyword}</a>
+			<a href="/search/{keyword}">{keyword}</a>
 		{/each}
 	</div>
 {:else}

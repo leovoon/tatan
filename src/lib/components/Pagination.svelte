@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto, preloadData } from '$app/navigation';
 	import { page, navigating } from '$app/stores';
+	import { i18n } from '$lib/i18n';
 	import * as m from '$paraglide/messages';
 
 	export let totalResults: number;
@@ -27,17 +28,17 @@
 
 	const handleNext = () => {
 		pageNum += 10;
-		goto(`/search/${query}?page=${pageNum}`, { noScroll: true });
+		goto(i18n.resolveRoute(`/search/${query}?page=${pageNum}`), { noScroll: true });
 		preloadData(`/search/${query}?page=${pageNum + 10}`);
 	};
 
 	const handlePrevious = () => {
 		pageNum -= 10;
-		goto(`/search/${query}?page=${pageNum}`, { noScroll: true });
+		goto(i18n.resolveRoute(`/search/${query}?page=${pageNum}`), { noScroll: true });
 	};
 </script>
 
-<div class="buttonGroup">
+<div class="buttonGroup" style:display={totalResults <= 10 || !totalResults ? 'none' : undefined}>
 	<button disabled={!showPrevious || isNavigating} on:click={handlePrevious}>
 		<span>{m.previous_page()}</span>
 	</button>
